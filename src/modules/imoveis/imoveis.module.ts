@@ -1,0 +1,11 @@
+import { Module } from '@nestjs/common';
+import { ImoveisController } from './controllers/imoveis.controller';
+import { ImoveisService } from './services/imoveis.service';
+
+//Aqui eu isolei o domínio de imóveis nesse módulo para manter o acoplamento baixo
+@Module({
+    controllers: [ImoveisController],
+    providers: [ImoveisService],
+})
+
+export class ImoveisModule {}
