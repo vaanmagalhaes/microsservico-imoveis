@@ -1,0 +1,146 @@
+// Aqui eu configurei a geração do client para uma pasta customizada dentro de src,
+// garantindo compatibilidade com o Docker do projeto e seguindo o padrão do microsserviço Locador.
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+// Defini o MySQL como provider e puxei a variável de ambiente segura.
+datasource db {
+  provider = "mysql"
+}
+
+// ---------------------------------------------------------
+// ENUMS (Mapeados exatamente conforme o script do P.O.)
+// ---------------------------------------------------------
+
+enum classificacao_enum {
+  RESIDENCIAL
+  COMERCIAL
+  RURAL
+  INDUSTRIAL
+}
+
+enum tipologia_enum {
+  CASA
+  APARTAMENTO
+  TERRENO
+  SALA_COMERCIAL
+  GALPAO
+}
+
+enum status_imovel_enum {
+  DISPONIVEL
+  ALUGADO
+  VENDIDO
+  INATIVO
+}
+
+enum status_contrato_enum {
+  ATIVO
+  INATIVO
+  RESCINDIDO
+}
+
+enum tipo_despesa_enum {
+  ALUGUEL
+  CONDOMINIO
+  IPTU
+  TAXA_BOMBEIRO
+  MANUTENCAO
+  OUTRA
+}
+
+enum status_despesa_enum {
+  PAGA
+  EM_ABERTO
+}
+
+// ---------------------------------------------------------
+// MODELS (Tabelas)
+// ---------------------------------------------------------
+
+model endereco {
+  // Criei a tabela de endereço espelhando os índices do script original para otimizar as buscas
+  id      Int      @id @default(autoincrement())
+  rua     String   @db.VarChar(150)
+  numero  String?  @db.VarChar(20)
+  bairro  String   @db.VarChar(100)
+  cidade  String   @db.VarChar(100)
+  estado  String   @db.Char(2)
+  cep     String   @db.VarChar(20)
+  imovel  imovel[]
+
+  @@index([cidade], map: "idx_cidade")
+  @@index([bairro], map: "idx_bairro")
+  @@index([estado], map: "idx_estado")
+}
+
+model imovel {
+  // O relacionamento com endereço foi configurado com Delete Cascade, 
+  // garantindo integridade referencial conforme exigido pelo professor.
+  id                Int                  @id @default(autoincrement())
+  idEndereco        Int
+  inscricaoIPTU     String?              @unique @db.VarChar(50)
+  inscricaoBombeiro String?              @db.VarChar(50)
+  metragem          String?              @db.VarChar(50)
+  dataCadastro      DateTime             @default(now()) @db.DateTime(0)
+  classificacao     classificacao_enum
+  tipologia         tipologia_enum
+  status            status_imovel_enum
+
+  endereco          endereco             @relation(fields: [idEndereco], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  contratolocacao   contratolocacao[]
+  propriedadeimovel propriedadeimovel[]
+
+  @@index([dataCadastro], map: "idx_dataCadastro")
+  @@index([status], map: "idx_status")
+  @@index([idEndereco], map: "idEndereco")
+}
+
+model propriedadeimovel {
+  // Aqui eu mapeei o idLocador como BigInt e o percentual como Decimal(5,2), 
+  // travando os tipos exatos do banco de dados relacional.
+  id                     Int     @id @default(autoincrement())
+  idImovel               Int
+  idLocador              BigInt
+  percentualParticipacao Decimal @db.Decimal(5, 2)
+  imovel                 imovel  @relation(fields: [idImovel], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@index([idImovel], map: "idImovel")
+}
+
+model contratolocacao {
+  // Tipifiquei o contratoDigitalizado como Bytes (LONGBLOB no MySQL) para suportar
+  // os uploads de PDF que passaremos através do FileInterceptor.
+  id                   BigInt               @id @default(autoincrement())
+  idImovel             Int
+  idLocador            BigInt
+  idLocatario          BigInt
+  dataInicio           DateTime             @db.Date
+  dataFim              DateTime?            @db.Date
+  dataReajuste         DateTime?            @db.Date
+  valorAluguel         Decimal              @db.Decimal(10, 2)
+  status               status_contrato_enum @default(ATIVO)
+  contratoDigitalizado Bytes?
+  imovel               imovel               @relation(fields: [idImovel], references: [id], onUpdate: Restrict)
+  despesa              despesa[]
+
+  @@index([idImovel], map: "idImovel")
+}
+
+model despesa {
+  // O comprovantePagamento também foi mapeado como Bytes para fechar o ecossistema financeiro.
+  id                   BigInt              @id @default(autoincrement())
+  idContratoLocacao    BigInt
+  descricao            String              @db.VarChar(255)
+  valor                Decimal             @db.Decimal(10, 2)
+  tipo                 tipo_despesa_enum
+  dataVencimento       DateTime            @db.Date
+  dataPagamento        DateTime?           @db.Date
+  status               status_despesa_enum @default(EM_ABERTO)
+  comprovantePagamento Bytes?
+  contratolocacao      contratolocacao     @relation(fields: [idContratoLocacao], references: [id], onDelete: Cascade, onUpdate: Restrict)
+
+  @@index([idContratoLocacao], map: "idContratoLocacao")
+}

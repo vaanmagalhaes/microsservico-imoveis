@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { DatabaseModule } from './database/database.module';
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  //Importei o DatabaseModule (que contém o Prisma) e o HealthModule.
+  //Como o DatabaseModule é @Global(), o HealthService já consegue usar o Prisma automaticamente.
+  imports: [DatabaseModule, HealthModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

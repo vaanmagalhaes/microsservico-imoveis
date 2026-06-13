@@ -1,0 +1,9427 @@
+
+/**
+ * Client
+**/
+
+import * as runtime from './runtime/client.js';
+import $Types = runtime.Types // general types
+import $Public = runtime.Types.Public
+import $Utils = runtime.Types.Utils
+import $Extensions = runtime.Types.Extensions
+import $Result = runtime.Types.Result
+
+export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+
+/**
+ * Model endereco
+ * 
+ */
+export type endereco = $Result.DefaultSelection<Prisma.$enderecoPayload>
+/**
+ * Model imovel
+ * 
+ */
+export type imovel = $Result.DefaultSelection<Prisma.$imovelPayload>
+/**
+ * Model propriedadeimovel
+ * 
+ */
+export type propriedadeimovel = $Result.DefaultSelection<Prisma.$propriedadeimovelPayload>
+/**
+ * Model contratolocacao
+ * 
+ */
+export type contratolocacao = $Result.DefaultSelection<Prisma.$contratolocacaoPayload>
+/**
+ * Model despesa
+ * 
+ */
+export type despesa = $Result.DefaultSelection<Prisma.$despesaPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const classificacao_enum: {
+  RESIDENCIAL: 'RESIDENCIAL',
+  COMERCIAL: 'COMERCIAL',
+  RURAL: 'RURAL',
+  INDUSTRIAL: 'INDUSTRIAL'
+};
+
+export type classificacao_enum = (typeof classificacao_enum)[keyof typeof classificacao_enum]
+
+
+export const tipologia_enum: {
+  CASA: 'CASA',
+  APARTAMENTO: 'APARTAMENTO',
+  TERRENO: 'TERRENO',
+  SALA_COMERCIAL: 'SALA_COMERCIAL',
+  GALPAO: 'GALPAO'
+};
+
+export type tipologia_enum = (typeof tipologia_enum)[keyof typeof tipologia_enum]
+
+
+export const status_imovel_enum: {
+  DISPONIVEL: 'DISPONIVEL',
+  ALUGADO: 'ALUGADO',
+  VENDIDO: 'VENDIDO',
+  INATIVO: 'INATIVO'
+};
+
+export type status_imovel_enum = (typeof status_imovel_enum)[keyof typeof status_imovel_enum]
+
+
+export const status_contrato_enum: {
+  ATIVO: 'ATIVO',
+  INATIVO: 'INATIVO',
+  RESCINDIDO: 'RESCINDIDO'
+};
+
+export type status_contrato_enum = (typeof status_contrato_enum)[keyof typeof status_contrato_enum]
+
+
+export const tipo_despesa_enum: {
+  ALUGUEL: 'ALUGUEL',
+  CONDOMINIO: 'CONDOMINIO',
+  IPTU: 'IPTU',
+  TAXA_BOMBEIRO: 'TAXA_BOMBEIRO',
+  MANUTENCAO: 'MANUTENCAO',
+  OUTRA: 'OUTRA'
+};
+
+export type tipo_despesa_enum = (typeof tipo_despesa_enum)[keyof typeof tipo_despesa_enum]
+
+
+export const status_despesa_enum: {
+  PAGA: 'PAGA',
+  EM_ABERTO: 'EM_ABERTO'
+};
+
+export type status_despesa_enum = (typeof status_despesa_enum)[keyof typeof status_despesa_enum]
+
+}
+
+export type classificacao_enum = $Enums.classificacao_enum
+
+export const classificacao_enum: typeof $Enums.classificacao_enum
+
+export type tipologia_enum = $Enums.tipologia_enum
+
+export const tipologia_enum: typeof $Enums.tipologia_enum
+
+export type status_imovel_enum = $Enums.status_imovel_enum
+
+export const status_imovel_enum: typeof $Enums.status_imovel_enum
+
+export type status_contrato_enum = $Enums.status_contrato_enum
+
+export const status_contrato_enum: typeof $Enums.status_contrato_enum
+
+export type tipo_despesa_enum = $Enums.tipo_despesa_enum
+
+export const tipo_despesa_enum: typeof $Enums.tipo_despesa_enum
+
+export type status_despesa_enum = $Enums.status_despesa_enum
+
+export const status_despesa_enum: typeof $Enums.status_despesa_enum
+
+/**
+ * ##  Prisma Client ʲˢ
+ *
+ * Type-safe database client for TypeScript & Node.js
+ * @example
+ * ```
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
+ * // Fetch zero or more Enderecos
+ * const enderecos = await prisma.endereco.findMany()
+ * ```
+ *
+ *
+ * Read more in our [docs](https://pris.ly/d/client).
+ */
+export class PrismaClient<
+  ClientOptions extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
+  const U = 'log' extends keyof ClientOptions ? ClientOptions['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<ClientOptions['log']> : never : never,
+  ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs
+> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['other'] }
+
+    /**
+   * ##  Prisma Client ʲˢ
+   *
+   * Type-safe database client for TypeScript & Node.js
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * })
+   * // Fetch zero or more Enderecos
+   * const enderecos = await prisma.endereco.findMany()
+   * ```
+   *
+   *
+   * Read more in our [docs](https://pris.ly/d/client).
+   */
+
+  constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
+
+  /**
+   * Connect with the database
+   */
+  $connect(): $Utils.JsPromise<void>;
+
+  /**
+   * Disconnect from the database
+   */
+  $disconnect(): $Utils.JsPromise<void>;
+
+/**
+   * Executes a prepared raw query and returns the number of affected rows.
+   * @example
+   * ```
+   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
+   */
+  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Executes a raw query and returns the number of affected rows.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
+   */
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<number>;
+
+  /**
+   * Performs a prepared raw query and returns the `SELECT` data.
+   * @example
+   * ```
+   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * ```
+   *
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
+   */
+  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): Prisma.PrismaPromise<T>;
+
+  /**
+   * Performs a raw query and returns the `SELECT` data.
+   * Susceptible to SQL injections, see documentation.
+   * @example
+   * ```
+   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * ```
+   *
+   * Read more in our [docs](https://pris.ly/d/raw-queries).
+   */
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
+
+
+  /**
+   * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
+   * @example
+   * ```
+   * const [george, bob, alice] = await prisma.$transaction([
+   *   prisma.user.create({ data: { name: 'George' } }),
+   *   prisma.user.create({ data: { name: 'Bob' } }),
+   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * ])
+   * ```
+   * 
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
+   */
+  $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
+
+  $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
+
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
+    extArgs: ExtArgs
+  }>>
+
+      /**
+   * `prisma.endereco`: Exposes CRUD operations for the **endereco** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Enderecos
+    * const enderecos = await prisma.endereco.findMany()
+    * ```
+    */
+  get endereco(): Prisma.enderecoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.imovel`: Exposes CRUD operations for the **imovel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Imovels
+    * const imovels = await prisma.imovel.findMany()
+    * ```
+    */
+  get imovel(): Prisma.imovelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.propriedadeimovel`: Exposes CRUD operations for the **propriedadeimovel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Propriedadeimovels
+    * const propriedadeimovels = await prisma.propriedadeimovel.findMany()
+    * ```
+    */
+  get propriedadeimovel(): Prisma.propriedadeimovelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contratolocacao`: Exposes CRUD operations for the **contratolocacao** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contratolocacaos
+    * const contratolocacaos = await prisma.contratolocacao.findMany()
+    * ```
+    */
+  get contratolocacao(): Prisma.contratolocacaoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.despesa`: Exposes CRUD operations for the **despesa** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Despesas
+    * const despesas = await prisma.despesa.findMany()
+    * ```
+    */
+  get despesa(): Prisma.despesaDelegate<ExtArgs, ClientOptions>;
+}
+
+export namespace Prisma {
+  export import DMMF = runtime.DMMF
+
+  export type PrismaPromise<T> = $Public.PrismaPromise<T>
+
+  /**
+   * Validator
+   */
+  export import validator = runtime.Public.validator
+
+  /**
+   * Prisma Errors
+   */
+  export import PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError
+  export import PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError
+  export import PrismaClientRustPanicError = runtime.PrismaClientRustPanicError
+  export import PrismaClientInitializationError = runtime.PrismaClientInitializationError
+  export import PrismaClientValidationError = runtime.PrismaClientValidationError
+
+  /**
+   * Re-export of sql-template-tag
+   */
+  export import sql = runtime.sqltag
+  export import empty = runtime.empty
+  export import join = runtime.join
+  export import raw = runtime.raw
+  export import Sql = runtime.Sql
+
+
+
+  /**
+   * Decimal.js
+   */
+  export import Decimal = runtime.Decimal
+
+  export type DecimalJsLike = runtime.DecimalJsLike
+
+  /**
+  * Extensions
+  */
+  export import Extension = $Extensions.UserArgs
+  export import getExtensionContext = runtime.Extensions.getExtensionContext
+  export import Args = $Public.Args
+  export import Payload = $Public.Payload
+  export import Result = $Public.Result
+  export import Exact = $Public.Exact
+
+  /**
+   * Prisma Client JS version: 7.8.0
+   * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+   */
+  export type PrismaVersion = {
+    client: string
+    engine: string
+  }
+
+  export const prismaVersion: PrismaVersion
+
+  /**
+   * Utility Types
+   */
+
+
+  export import Bytes = runtime.Bytes
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
+
+  /**
+   * Types of the values used to represent different kinds of `null` values when working with JSON fields.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  namespace NullTypes {
+    /**
+    * Type of `Prisma.DbNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.DbNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class DbNull {
+      private DbNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.JsonNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.JsonNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class JsonNull {
+      private JsonNull: never
+      private constructor()
+    }
+
+    /**
+    * Type of `Prisma.AnyNull`.
+    *
+    * You cannot use other instances of this class. Please use the `Prisma.AnyNull` value.
+    *
+    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+    */
+    class AnyNull {
+      private AnyNull: never
+      private constructor()
+    }
+  }
+
+  /**
+   * Helper for filtering JSON entries that have `null` on the database (empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const DbNull: NullTypes.DbNull
+
+  /**
+   * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const JsonNull: NullTypes.JsonNull
+
+  /**
+   * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
+   */
+  export const AnyNull: NullTypes.AnyNull
+
+  type SelectAndInclude = {
+    select: any
+    include: any
+  }
+
+  type SelectAndOmit = {
+    select: any
+    omit: any
+  }
+
+  /**
+   * Get the type of the value, that the Promise holds.
+   */
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+
+  /**
+   * Get the return type of a function which returns a Promise.
+   */
+  export type PromiseReturnType<T extends (...args: any) => $Utils.JsPromise<any>> = PromiseType<ReturnType<T>>
+
+  /**
+   * From T, pick a set of properties whose keys are in the union K
+   */
+  type Prisma__Pick<T, K extends keyof T> = {
+      [P in K]: T[P];
+  };
+
+
+  export type Enumerable<T> = T | Array<T>;
+
+  export type RequiredKeys<T> = {
+    [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
+  }[keyof T]
+
+  export type TruthyKeys<T> = keyof {
+    [K in keyof T as T[K] extends false | undefined | null ? never : K]: K
+  }
+
+  export type TrueKeys<T> = TruthyKeys<Prisma__Pick<T, RequiredKeys<T>>>
+
+  /**
+   * Subset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
+   */
+  export type Subset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never;
+  };
+
+  /**
+   * SelectSubset
+   * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
+   * Additionally, it validates, if both select and include are present. If the case, it errors.
+   */
+  export type SelectSubset<T, U> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    (T extends SelectAndInclude
+      ? 'Please either choose `select` or `include`.'
+      : T extends SelectAndOmit
+        ? 'Please either choose `select` or `omit`.'
+        : {})
+
+  /**
+   * Subset + Intersection
+   * @desc From `T` pick properties that exist in `U` and intersect `K`
+   */
+  export type SubsetIntersection<T, U, K> = {
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  } &
+    K
+
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+  /**
+   * XOR is needed to have a real mutually exclusive union type
+   * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
+   */
+  type XOR<T, U> =
+    T extends object ?
+    U extends object ?
+      (Without<T, U> & U) | (Without<U, T> & T)
+    : U : T
+
+
+  /**
+   * Is T a Record?
+   */
+  type IsObject<T extends any> = T extends Array<any>
+  ? False
+  : T extends Date
+  ? False
+  : T extends Uint8Array
+  ? False
+  : T extends BigInt
+  ? False
+  : T extends object
+  ? True
+  : False
+
+
+  /**
+   * If it's T[], return T
+   */
+  export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T
+
+  /**
+   * From ts-toolbelt
+   */
+
+  type __Either<O extends object, K extends Key> = Omit<O, K> &
+    {
+      // Merge all but K
+      [P in K]: Prisma__Pick<O, P & keyof O> // With K possibilities
+    }[K]
+
+  type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>
+
+  type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
+
+  type _Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean
+  > = {
+    1: EitherStrict<O, K>
+    0: EitherLoose<O, K>
+  }[strict]
+
+  type Either<
+    O extends object,
+    K extends Key,
+    strict extends Boolean = 1
+  > = O extends unknown ? _Either<O, K, strict> : never
+
+  export type Union = any
+
+  type PatchUndefined<O extends object, O1 extends object> = {
+    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K]
+  } & {}
+
+  /** Helper Types for "Merge" **/
+  export type IntersectOf<U extends Union> = (
+    U extends unknown ? (k: U) => void : never
+  ) extends (k: infer I) => void
+    ? I
+    : never
+
+  export type Overwrite<O extends object, O1 extends object> = {
+      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+  } & {};
+
+  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
+      [K in keyof U]-?: At<U, K>;
+  }>>;
+
+  type Key = string | number | symbol;
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
+      1: AtStrict<O, K>;
+      0: AtLoose<O, K>;
+  }[strict];
+
+  export type ComputeRaw<A extends any> = A extends Function ? A : {
+    [K in keyof A]: A[K];
+  } & {};
+
+  export type OptionalFlat<O> = {
+    [K in keyof O]?: O[K];
+  } & {};
+
+  type _Record<K extends keyof any, T> = {
+    [P in K]: T;
+  };
+
+  // cause typescript not to expand types and preserve names
+  type NoExpand<T> = T extends unknown ? T : never;
+
+  // this type assumes the passed object is entirely optional
+  type AtLeast<O extends object, K extends string> = NoExpand<
+    O extends unknown
+    ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
+    : never>;
+
+  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  /** End Helper Types for "Merge" **/
+
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+
+  /**
+  A [[Boolean]]
+  */
+  export type Boolean = True | False
+
+  // /**
+  // 1
+  // */
+  export type True = 1
+
+  /**
+  0
+  */
+  export type False = 0
+
+  export type Not<B extends Boolean> = {
+    0: 1
+    1: 0
+  }[B]
+
+  export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+    ? 0 // anything `never` is false
+    : A1 extends A2
+    ? 1
+    : 0
+
+  export type Has<U extends Union, U1 extends Union> = Not<
+    Extends<Exclude<U1, U>, U1>
+  >
+
+  export type Or<B1 extends Boolean, B2 extends Boolean> = {
+    0: {
+      0: 0
+      1: 1
+    }
+    1: {
+      0: 1
+      1: 1
+    }
+  }[B1][B2]
+
+  export type Keys<U extends Union> = U extends unknown ? keyof U : never
+
+  type Cast<A, B> = A extends B ? A : B;
+
+  export const type: unique symbol;
+
+
+
+  /**
+   * Used by group by
+   */
+
+  export type GetScalarType<T, O> = O extends object ? {
+    [P in keyof T]: P extends keyof O
+      ? O[P]
+      : never
+  } : never
+
+  type FieldPaths<
+    T,
+    U = Omit<T, '_avg' | '_sum' | '_count' | '_min' | '_max'>
+  > = IsObject<T> extends True ? U : T
+
+  type GetHavingFields<T> = {
+    [K in keyof T]: Or<
+      Or<Extends<'OR', K>, Extends<'AND', K>>,
+      Extends<'NOT', K>
+    > extends True
+      ? // infer is only needed to not hit TS limit
+        // based on the brilliant idea of Pierre-Antoine Mills
+        // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+        T[K] extends infer TK
+        ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+        : never
+      : {} extends FieldPaths<T[K]>
+      ? never
+      : K
+  }[keyof T]
+
+  /**
+   * Convert tuple to union
+   */
+  type _TupleToUnion<T> = T extends (infer E)[] ? E : never
+  type TupleToUnion<K extends readonly any[]> = _TupleToUnion<K>
+  type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T
+
+  /**
+   * Like `Pick`, but additionally can also accept an array of keys
+   */
+  type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>
+
+  /**
+   * Exclude all keys with underscores
+   */
+  type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
+
+
+  export type FieldRef<Model, FieldType> = runtime.FieldRef<Model, FieldType>
+
+  type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRef<Model, FieldType>
+
+
+  export const ModelName: {
+    endereco: 'endereco',
+    imovel: 'imovel',
+    propriedadeimovel: 'propriedadeimovel',
+    contratolocacao: 'contratolocacao',
+    despesa: 'despesa'
+  };
+
+  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
+
+
+
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
+  }
+
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+    globalOmitOptions: {
+      omit: GlobalOmitOptions
+    }
+    meta: {
+      modelProps: "endereco" | "imovel" | "propriedadeimovel" | "contratolocacao" | "despesa"
+      txIsolationLevel: Prisma.TransactionIsolationLevel
+    }
+    model: {
+      endereco: {
+        payload: Prisma.$enderecoPayload<ExtArgs>
+        fields: Prisma.enderecoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.enderecoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.enderecoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          findFirst: {
+            args: Prisma.enderecoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.enderecoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          findMany: {
+            args: Prisma.enderecoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>[]
+          }
+          create: {
+            args: Prisma.enderecoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          createMany: {
+            args: Prisma.enderecoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.enderecoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          update: {
+            args: Prisma.enderecoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          deleteMany: {
+            args: Prisma.enderecoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.enderecoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.enderecoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$enderecoPayload>
+          }
+          aggregate: {
+            args: Prisma.EnderecoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEndereco>
+          }
+          groupBy: {
+            args: Prisma.enderecoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnderecoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.enderecoCountArgs<ExtArgs>
+            result: $Utils.Optional<EnderecoCountAggregateOutputType> | number
+          }
+        }
+      }
+      imovel: {
+        payload: Prisma.$imovelPayload<ExtArgs>
+        fields: Prisma.imovelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.imovelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.imovelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          findFirst: {
+            args: Prisma.imovelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.imovelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          findMany: {
+            args: Prisma.imovelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>[]
+          }
+          create: {
+            args: Prisma.imovelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          createMany: {
+            args: Prisma.imovelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.imovelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          update: {
+            args: Prisma.imovelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          deleteMany: {
+            args: Prisma.imovelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.imovelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.imovelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$imovelPayload>
+          }
+          aggregate: {
+            args: Prisma.ImovelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateImovel>
+          }
+          groupBy: {
+            args: Prisma.imovelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ImovelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.imovelCountArgs<ExtArgs>
+            result: $Utils.Optional<ImovelCountAggregateOutputType> | number
+          }
+        }
+      }
+      propriedadeimovel: {
+        payload: Prisma.$propriedadeimovelPayload<ExtArgs>
+        fields: Prisma.propriedadeimovelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.propriedadeimovelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.propriedadeimovelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          findFirst: {
+            args: Prisma.propriedadeimovelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.propriedadeimovelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          findMany: {
+            args: Prisma.propriedadeimovelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>[]
+          }
+          create: {
+            args: Prisma.propriedadeimovelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          createMany: {
+            args: Prisma.propriedadeimovelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.propriedadeimovelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          update: {
+            args: Prisma.propriedadeimovelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          deleteMany: {
+            args: Prisma.propriedadeimovelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.propriedadeimovelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.propriedadeimovelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$propriedadeimovelPayload>
+          }
+          aggregate: {
+            args: Prisma.PropriedadeimovelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePropriedadeimovel>
+          }
+          groupBy: {
+            args: Prisma.propriedadeimovelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PropriedadeimovelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.propriedadeimovelCountArgs<ExtArgs>
+            result: $Utils.Optional<PropriedadeimovelCountAggregateOutputType> | number
+          }
+        }
+      }
+      contratolocacao: {
+        payload: Prisma.$contratolocacaoPayload<ExtArgs>
+        fields: Prisma.contratolocacaoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.contratolocacaoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.contratolocacaoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          findFirst: {
+            args: Prisma.contratolocacaoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.contratolocacaoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          findMany: {
+            args: Prisma.contratolocacaoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>[]
+          }
+          create: {
+            args: Prisma.contratolocacaoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          createMany: {
+            args: Prisma.contratolocacaoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.contratolocacaoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          update: {
+            args: Prisma.contratolocacaoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          deleteMany: {
+            args: Prisma.contratolocacaoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.contratolocacaoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.contratolocacaoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$contratolocacaoPayload>
+          }
+          aggregate: {
+            args: Prisma.ContratolocacaoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContratolocacao>
+          }
+          groupBy: {
+            args: Prisma.contratolocacaoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContratolocacaoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.contratolocacaoCountArgs<ExtArgs>
+            result: $Utils.Optional<ContratolocacaoCountAggregateOutputType> | number
+          }
+        }
+      }
+      despesa: {
+        payload: Prisma.$despesaPayload<ExtArgs>
+        fields: Prisma.despesaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.despesaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.despesaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          findFirst: {
+            args: Prisma.despesaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.despesaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          findMany: {
+            args: Prisma.despesaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>[]
+          }
+          create: {
+            args: Prisma.despesaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          createMany: {
+            args: Prisma.despesaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.despesaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          update: {
+            args: Prisma.despesaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          deleteMany: {
+            args: Prisma.despesaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.despesaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.despesaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$despesaPayload>
+          }
+          aggregate: {
+            args: Prisma.DespesaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDespesa>
+          }
+          groupBy: {
+            args: Prisma.despesaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DespesaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.despesaCountArgs<ExtArgs>
+            result: $Utils.Optional<DespesaCountAggregateOutputType> | number
+          }
+        }
+      }
+    }
+  } & {
+    other: {
+      payload: any
+      operations: {
+        $executeRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $executeRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+        $queryRaw: {
+          args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $queryRawUnsafe: {
+          args: [query: string, ...values: any[]],
+          result: any
+        }
+      }
+    }
+  }
+  export const defineExtension: $Extensions.ExtendsHook<"define", Prisma.TypeMapCb, $Extensions.DefaultArgs>
+  export type DefaultPrismaClient = PrismaClient
+  export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
+  export interface PrismaClientOptions {
+    /**
+     * @default "colorless"
+     */
+    errorFormat?: ErrorFormat
+    /**
+     * @example
+     * ```
+     * // Shorthand for `emit: 'stdout'`
+     * log: ['query', 'info', 'warn', 'error']
+     * 
+     * // Emit as events only
+     * log: [
+     *   { emit: 'event', level: 'query' },
+     *   { emit: 'event', level: 'info' },
+     *   { emit: 'event', level: 'warn' }
+     *   { emit: 'event', level: 'error' }
+     * ]
+     * 
+     * / Emit as events and log to stdout
+     * og: [
+     *  { emit: 'stdout', level: 'query' },
+     *  { emit: 'stdout', level: 'info' },
+     *  { emit: 'stdout', level: 'warn' }
+     *  { emit: 'stdout', level: 'error' }
+     * 
+     * ```
+     * Read more in our [docs](https://pris.ly/d/logging).
+     */
+    log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
+    /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory
+    /**
+     * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
+     */
+    accelerateUrl?: string
+    /**
+     * Global configuration for omitting model fields by default.
+     * 
+     * @example
+     * ```
+     * const prisma = new PrismaClient({
+     *   omit: {
+     *     user: {
+     *       password: true
+     *     }
+     *   }
+     * })
+     * ```
+     */
+    omit?: Prisma.GlobalOmitConfig
+    /**
+     * SQL commenter plugins that add metadata to SQL queries as comments.
+     * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
+     * 
+     * @example
+     * ```
+     * const prisma = new PrismaClient({
+     *   adapter,
+     *   comments: [
+     *     traceContext(),
+     *     queryInsights(),
+     *   ],
+     * })
+     * ```
+     */
+    comments?: runtime.SqlCommenterPlugin[]
+  }
+  export type GlobalOmitConfig = {
+    endereco?: enderecoOmit
+    imovel?: imovelOmit
+    propriedadeimovel?: propriedadeimovelOmit
+    contratolocacao?: contratolocacaoOmit
+    despesa?: despesaOmit
+  }
+
+  /* Types for Logging */
+  export type LogLevel = 'info' | 'query' | 'warn' | 'error'
+  export type LogDefinition = {
+    level: LogLevel
+    emit: 'stdout' | 'event'
+  }
+
+  export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+  export type GetLogType<T> = CheckIsLogLevel<
+    T extends LogDefinition ? T['level'] : T
+  >;
+
+  export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[number]>
+    : never;
+
+  export type QueryEvent = {
+    timestamp: Date
+    query: string
+    params: string
+    duration: number
+    target: string
+  }
+
+  export type LogEvent = {
+    timestamp: Date
+    message: string
+    target: string
+  }
+  /* End Types for Logging */
+
+
+  export type PrismaAction =
+    | 'findUnique'
+    | 'findUniqueOrThrow'
+    | 'findMany'
+    | 'findFirst'
+    | 'findFirstOrThrow'
+    | 'create'
+    | 'createMany'
+    | 'createManyAndReturn'
+    | 'update'
+    | 'updateMany'
+    | 'updateManyAndReturn'
+    | 'upsert'
+    | 'delete'
+    | 'deleteMany'
+    | 'executeRaw'
+    | 'queryRaw'
+    | 'aggregate'
+    | 'count'
+    | 'runCommandRaw'
+    | 'findRaw'
+    | 'groupBy'
+
+  // tested in getLogLevel.test.ts
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined;
+
+  /**
+   * `PrismaClient` proxy available in interactive transactions.
+   */
+  export type TransactionClient = Omit<Prisma.DefaultPrismaClient, runtime.ITXClientDenyList>
+
+  export type Datasource = {
+    url?: string
+  }
+
+  /**
+   * Count Types
+   */
+
+
+  /**
+   * Count Type EnderecoCountOutputType
+   */
+
+  export type EnderecoCountOutputType = {
+    imovel: number
+  }
+
+  export type EnderecoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imovel?: boolean | EnderecoCountOutputTypeCountImovelArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EnderecoCountOutputType without action
+   */
+  export type EnderecoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnderecoCountOutputType
+     */
+    select?: EnderecoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EnderecoCountOutputType without action
+   */
+  export type EnderecoCountOutputTypeCountImovelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: imovelWhereInput
+  }
+
+
+  /**
+   * Count Type ImovelCountOutputType
+   */
+
+  export type ImovelCountOutputType = {
+    contratolocacao: number
+    propriedadeimovel: number
+  }
+
+  export type ImovelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contratolocacao?: boolean | ImovelCountOutputTypeCountContratolocacaoArgs
+    propriedadeimovel?: boolean | ImovelCountOutputTypeCountPropriedadeimovelArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ImovelCountOutputType without action
+   */
+  export type ImovelCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImovelCountOutputType
+     */
+    select?: ImovelCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ImovelCountOutputType without action
+   */
+  export type ImovelCountOutputTypeCountContratolocacaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contratolocacaoWhereInput
+  }
+
+  /**
+   * ImovelCountOutputType without action
+   */
+  export type ImovelCountOutputTypeCountPropriedadeimovelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: propriedadeimovelWhereInput
+  }
+
+
+  /**
+   * Count Type ContratolocacaoCountOutputType
+   */
+
+  export type ContratolocacaoCountOutputType = {
+    despesa: number
+  }
+
+  export type ContratolocacaoCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    despesa?: boolean | ContratolocacaoCountOutputTypeCountDespesaArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ContratolocacaoCountOutputType without action
+   */
+  export type ContratolocacaoCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContratolocacaoCountOutputType
+     */
+    select?: ContratolocacaoCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ContratolocacaoCountOutputType without action
+   */
+  export type ContratolocacaoCountOutputTypeCountDespesaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: despesaWhereInput
+  }
+
+
+  /**
+   * Models
+   */
+
+  /**
+   * Model endereco
+   */
+
+  export type AggregateEndereco = {
+    _count: EnderecoCountAggregateOutputType | null
+    _avg: EnderecoAvgAggregateOutputType | null
+    _sum: EnderecoSumAggregateOutputType | null
+    _min: EnderecoMinAggregateOutputType | null
+    _max: EnderecoMaxAggregateOutputType | null
+  }
+
+  export type EnderecoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EnderecoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EnderecoMinAggregateOutputType = {
+    id: number | null
+    rua: string | null
+    numero: string | null
+    bairro: string | null
+    cidade: string | null
+    estado: string | null
+    cep: string | null
+  }
+
+  export type EnderecoMaxAggregateOutputType = {
+    id: number | null
+    rua: string | null
+    numero: string | null
+    bairro: string | null
+    cidade: string | null
+    estado: string | null
+    cep: string | null
+  }
+
+  export type EnderecoCountAggregateOutputType = {
+    id: number
+    rua: number
+    numero: number
+    bairro: number
+    cidade: number
+    estado: number
+    cep: number
+    _all: number
+  }
+
+
+  export type EnderecoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type EnderecoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type EnderecoMinAggregateInputType = {
+    id?: true
+    rua?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    cep?: true
+  }
+
+  export type EnderecoMaxAggregateInputType = {
+    id?: true
+    rua?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    cep?: true
+  }
+
+  export type EnderecoCountAggregateInputType = {
+    id?: true
+    rua?: true
+    numero?: true
+    bairro?: true
+    cidade?: true
+    estado?: true
+    cep?: true
+    _all?: true
+  }
+
+  export type EnderecoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which endereco to aggregate.
+     */
+    where?: enderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of enderecos to fetch.
+     */
+    orderBy?: enderecoOrderByWithRelationInput | enderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: enderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned enderecos
+    **/
+    _count?: true | EnderecoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnderecoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnderecoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnderecoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnderecoMaxAggregateInputType
+  }
+
+  export type GetEnderecoAggregateType<T extends EnderecoAggregateArgs> = {
+        [P in keyof T & keyof AggregateEndereco]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEndereco[P]>
+      : GetScalarType<T[P], AggregateEndereco[P]>
+  }
+
+
+
+
+  export type enderecoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: enderecoWhereInput
+    orderBy?: enderecoOrderByWithAggregationInput | enderecoOrderByWithAggregationInput[]
+    by: EnderecoScalarFieldEnum[] | EnderecoScalarFieldEnum
+    having?: enderecoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnderecoCountAggregateInputType | true
+    _avg?: EnderecoAvgAggregateInputType
+    _sum?: EnderecoSumAggregateInputType
+    _min?: EnderecoMinAggregateInputType
+    _max?: EnderecoMaxAggregateInputType
+  }
+
+  export type EnderecoGroupByOutputType = {
+    id: number
+    rua: string
+    numero: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+    _count: EnderecoCountAggregateOutputType | null
+    _avg: EnderecoAvgAggregateOutputType | null
+    _sum: EnderecoSumAggregateOutputType | null
+    _min: EnderecoMinAggregateOutputType | null
+    _max: EnderecoMaxAggregateOutputType | null
+  }
+
+  type GetEnderecoGroupByPayload<T extends enderecoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnderecoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnderecoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
+            : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type enderecoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    rua?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    cep?: boolean
+    imovel?: boolean | endereco$imovelArgs<ExtArgs>
+    _count?: boolean | EnderecoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["endereco"]>
+
+
+
+  export type enderecoSelectScalar = {
+    id?: boolean
+    rua?: boolean
+    numero?: boolean
+    bairro?: boolean
+    cidade?: boolean
+    estado?: boolean
+    cep?: boolean
+  }
+
+  export type enderecoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rua" | "numero" | "bairro" | "cidade" | "estado" | "cep", ExtArgs["result"]["endereco"]>
+  export type enderecoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imovel?: boolean | endereco$imovelArgs<ExtArgs>
+    _count?: boolean | EnderecoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $enderecoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "endereco"
+    objects: {
+      imovel: Prisma.$imovelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      rua: string
+      numero: string | null
+      bairro: string
+      cidade: string
+      estado: string
+      cep: string
+    }, ExtArgs["result"]["endereco"]>
+    composites: {}
+  }
+
+  type enderecoGetPayload<S extends boolean | null | undefined | enderecoDefaultArgs> = $Result.GetResult<Prisma.$enderecoPayload, S>
+
+  type enderecoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<enderecoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnderecoCountAggregateInputType | true
+    }
+
+  export interface enderecoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['endereco'], meta: { name: 'endereco' } }
+    /**
+     * Find zero or one Endereco that matches the filter.
+     * @param {enderecoFindUniqueArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends enderecoFindUniqueArgs>(args: SelectSubset<T, enderecoFindUniqueArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Endereco that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {enderecoFindUniqueOrThrowArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends enderecoFindUniqueOrThrowArgs>(args: SelectSubset<T, enderecoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Endereco that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoFindFirstArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends enderecoFindFirstArgs>(args?: SelectSubset<T, enderecoFindFirstArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Endereco that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoFindFirstOrThrowArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends enderecoFindFirstOrThrowArgs>(args?: SelectSubset<T, enderecoFindFirstOrThrowArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Enderecos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Enderecos
+     * const enderecos = await prisma.endereco.findMany()
+     * 
+     * // Get first 10 Enderecos
+     * const enderecos = await prisma.endereco.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const enderecoWithIdOnly = await prisma.endereco.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends enderecoFindManyArgs>(args?: SelectSubset<T, enderecoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Endereco.
+     * @param {enderecoCreateArgs} args - Arguments to create a Endereco.
+     * @example
+     * // Create one Endereco
+     * const Endereco = await prisma.endereco.create({
+     *   data: {
+     *     // ... data to create a Endereco
+     *   }
+     * })
+     * 
+     */
+    create<T extends enderecoCreateArgs>(args: SelectSubset<T, enderecoCreateArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Enderecos.
+     * @param {enderecoCreateManyArgs} args - Arguments to create many Enderecos.
+     * @example
+     * // Create many Enderecos
+     * const endereco = await prisma.endereco.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends enderecoCreateManyArgs>(args?: SelectSubset<T, enderecoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Endereco.
+     * @param {enderecoDeleteArgs} args - Arguments to delete one Endereco.
+     * @example
+     * // Delete one Endereco
+     * const Endereco = await prisma.endereco.delete({
+     *   where: {
+     *     // ... filter to delete one Endereco
+     *   }
+     * })
+     * 
+     */
+    delete<T extends enderecoDeleteArgs>(args: SelectSubset<T, enderecoDeleteArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Endereco.
+     * @param {enderecoUpdateArgs} args - Arguments to update one Endereco.
+     * @example
+     * // Update one Endereco
+     * const endereco = await prisma.endereco.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends enderecoUpdateArgs>(args: SelectSubset<T, enderecoUpdateArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Enderecos.
+     * @param {enderecoDeleteManyArgs} args - Arguments to filter Enderecos to delete.
+     * @example
+     * // Delete a few Enderecos
+     * const { count } = await prisma.endereco.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends enderecoDeleteManyArgs>(args?: SelectSubset<T, enderecoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Enderecos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Enderecos
+     * const endereco = await prisma.endereco.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends enderecoUpdateManyArgs>(args: SelectSubset<T, enderecoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Endereco.
+     * @param {enderecoUpsertArgs} args - Arguments to update or create a Endereco.
+     * @example
+     * // Update or create a Endereco
+     * const endereco = await prisma.endereco.upsert({
+     *   create: {
+     *     // ... data to create a Endereco
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Endereco we want to update
+     *   }
+     * })
+     */
+    upsert<T extends enderecoUpsertArgs>(args: SelectSubset<T, enderecoUpsertArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Enderecos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoCountArgs} args - Arguments to filter Enderecos to count.
+     * @example
+     * // Count the number of Enderecos
+     * const count = await prisma.endereco.count({
+     *   where: {
+     *     // ... the filter for the Enderecos we want to count
+     *   }
+     * })
+    **/
+    count<T extends enderecoCountArgs>(
+      args?: Subset<T, enderecoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnderecoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Endereco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnderecoAggregateArgs>(args: Subset<T, EnderecoAggregateArgs>): Prisma.PrismaPromise<GetEnderecoAggregateType<T>>
+
+    /**
+     * Group by Endereco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {enderecoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends enderecoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: enderecoGroupByArgs['orderBy'] }
+        : { orderBy?: enderecoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, enderecoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnderecoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the endereco model
+   */
+  readonly fields: enderecoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for endereco.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__enderecoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    imovel<T extends endereco$imovelArgs<ExtArgs> = {}>(args?: Subset<T, endereco$imovelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the endereco model
+   */
+  interface enderecoFieldRefs {
+    readonly id: FieldRef<"endereco", 'Int'>
+    readonly rua: FieldRef<"endereco", 'String'>
+    readonly numero: FieldRef<"endereco", 'String'>
+    readonly bairro: FieldRef<"endereco", 'String'>
+    readonly cidade: FieldRef<"endereco", 'String'>
+    readonly estado: FieldRef<"endereco", 'String'>
+    readonly cep: FieldRef<"endereco", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * endereco findUnique
+   */
+  export type enderecoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which endereco to fetch.
+     */
+    where: enderecoWhereUniqueInput
+  }
+
+  /**
+   * endereco findUniqueOrThrow
+   */
+  export type enderecoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which endereco to fetch.
+     */
+    where: enderecoWhereUniqueInput
+  }
+
+  /**
+   * endereco findFirst
+   */
+  export type enderecoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which endereco to fetch.
+     */
+    where?: enderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of enderecos to fetch.
+     */
+    orderBy?: enderecoOrderByWithRelationInput | enderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for enderecos.
+     */
+    cursor?: enderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of enderecos.
+     */
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * endereco findFirstOrThrow
+   */
+  export type enderecoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which endereco to fetch.
+     */
+    where?: enderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of enderecos to fetch.
+     */
+    orderBy?: enderecoOrderByWithRelationInput | enderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for enderecos.
+     */
+    cursor?: enderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of enderecos.
+     */
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * endereco findMany
+   */
+  export type enderecoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which enderecos to fetch.
+     */
+    where?: enderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of enderecos to fetch.
+     */
+    orderBy?: enderecoOrderByWithRelationInput | enderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing enderecos.
+     */
+    cursor?: enderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of enderecos.
+     */
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * endereco create
+   */
+  export type enderecoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a endereco.
+     */
+    data: XOR<enderecoCreateInput, enderecoUncheckedCreateInput>
+  }
+
+  /**
+   * endereco createMany
+   */
+  export type enderecoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many enderecos.
+     */
+    data: enderecoCreateManyInput | enderecoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * endereco update
+   */
+  export type enderecoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a endereco.
+     */
+    data: XOR<enderecoUpdateInput, enderecoUncheckedUpdateInput>
+    /**
+     * Choose, which endereco to update.
+     */
+    where: enderecoWhereUniqueInput
+  }
+
+  /**
+   * endereco updateMany
+   */
+  export type enderecoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update enderecos.
+     */
+    data: XOR<enderecoUpdateManyMutationInput, enderecoUncheckedUpdateManyInput>
+    /**
+     * Filter which enderecos to update
+     */
+    where?: enderecoWhereInput
+    /**
+     * Limit how many enderecos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * endereco upsert
+   */
+  export type enderecoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the endereco to update in case it exists.
+     */
+    where: enderecoWhereUniqueInput
+    /**
+     * In case the endereco found by the `where` argument doesn't exist, create a new endereco with this data.
+     */
+    create: XOR<enderecoCreateInput, enderecoUncheckedCreateInput>
+    /**
+     * In case the endereco was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<enderecoUpdateInput, enderecoUncheckedUpdateInput>
+  }
+
+  /**
+   * endereco delete
+   */
+  export type enderecoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+    /**
+     * Filter which endereco to delete.
+     */
+    where: enderecoWhereUniqueInput
+  }
+
+  /**
+   * endereco deleteMany
+   */
+  export type enderecoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which enderecos to delete
+     */
+    where?: enderecoWhereInput
+    /**
+     * Limit how many enderecos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * endereco.imovel
+   */
+  export type endereco$imovelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    where?: imovelWhereInput
+    orderBy?: imovelOrderByWithRelationInput | imovelOrderByWithRelationInput[]
+    cursor?: imovelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ImovelScalarFieldEnum | ImovelScalarFieldEnum[]
+  }
+
+  /**
+   * endereco without action
+   */
+  export type enderecoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the endereco
+     */
+    select?: enderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the endereco
+     */
+    omit?: enderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: enderecoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model imovel
+   */
+
+  export type AggregateImovel = {
+    _count: ImovelCountAggregateOutputType | null
+    _avg: ImovelAvgAggregateOutputType | null
+    _sum: ImovelSumAggregateOutputType | null
+    _min: ImovelMinAggregateOutputType | null
+    _max: ImovelMaxAggregateOutputType | null
+  }
+
+  export type ImovelAvgAggregateOutputType = {
+    id: number | null
+    idEndereco: number | null
+  }
+
+  export type ImovelSumAggregateOutputType = {
+    id: number | null
+    idEndereco: number | null
+  }
+
+  export type ImovelMinAggregateOutputType = {
+    id: number | null
+    idEndereco: number | null
+    inscricaoIPTU: string | null
+    inscricaoBombeiro: string | null
+    metragem: string | null
+    dataCadastro: Date | null
+    classificacao: $Enums.classificacao_enum | null
+    tipologia: $Enums.tipologia_enum | null
+    status: $Enums.status_imovel_enum | null
+  }
+
+  export type ImovelMaxAggregateOutputType = {
+    id: number | null
+    idEndereco: number | null
+    inscricaoIPTU: string | null
+    inscricaoBombeiro: string | null
+    metragem: string | null
+    dataCadastro: Date | null
+    classificacao: $Enums.classificacao_enum | null
+    tipologia: $Enums.tipologia_enum | null
+    status: $Enums.status_imovel_enum | null
+  }
+
+  export type ImovelCountAggregateOutputType = {
+    id: number
+    idEndereco: number
+    inscricaoIPTU: number
+    inscricaoBombeiro: number
+    metragem: number
+    dataCadastro: number
+    classificacao: number
+    tipologia: number
+    status: number
+    _all: number
+  }
+
+
+  export type ImovelAvgAggregateInputType = {
+    id?: true
+    idEndereco?: true
+  }
+
+  export type ImovelSumAggregateInputType = {
+    id?: true
+    idEndereco?: true
+  }
+
+  export type ImovelMinAggregateInputType = {
+    id?: true
+    idEndereco?: true
+    inscricaoIPTU?: true
+    inscricaoBombeiro?: true
+    metragem?: true
+    dataCadastro?: true
+    classificacao?: true
+    tipologia?: true
+    status?: true
+  }
+
+  export type ImovelMaxAggregateInputType = {
+    id?: true
+    idEndereco?: true
+    inscricaoIPTU?: true
+    inscricaoBombeiro?: true
+    metragem?: true
+    dataCadastro?: true
+    classificacao?: true
+    tipologia?: true
+    status?: true
+  }
+
+  export type ImovelCountAggregateInputType = {
+    id?: true
+    idEndereco?: true
+    inscricaoIPTU?: true
+    inscricaoBombeiro?: true
+    metragem?: true
+    dataCadastro?: true
+    classificacao?: true
+    tipologia?: true
+    status?: true
+    _all?: true
+  }
+
+  export type ImovelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which imovel to aggregate.
+     */
+    where?: imovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of imovels to fetch.
+     */
+    orderBy?: imovelOrderByWithRelationInput | imovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: imovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` imovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` imovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned imovels
+    **/
+    _count?: true | ImovelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ImovelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ImovelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ImovelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ImovelMaxAggregateInputType
+  }
+
+  export type GetImovelAggregateType<T extends ImovelAggregateArgs> = {
+        [P in keyof T & keyof AggregateImovel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateImovel[P]>
+      : GetScalarType<T[P], AggregateImovel[P]>
+  }
+
+
+
+
+  export type imovelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: imovelWhereInput
+    orderBy?: imovelOrderByWithAggregationInput | imovelOrderByWithAggregationInput[]
+    by: ImovelScalarFieldEnum[] | ImovelScalarFieldEnum
+    having?: imovelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ImovelCountAggregateInputType | true
+    _avg?: ImovelAvgAggregateInputType
+    _sum?: ImovelSumAggregateInputType
+    _min?: ImovelMinAggregateInputType
+    _max?: ImovelMaxAggregateInputType
+  }
+
+  export type ImovelGroupByOutputType = {
+    id: number
+    idEndereco: number
+    inscricaoIPTU: string | null
+    inscricaoBombeiro: string | null
+    metragem: string | null
+    dataCadastro: Date
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    _count: ImovelCountAggregateOutputType | null
+    _avg: ImovelAvgAggregateOutputType | null
+    _sum: ImovelSumAggregateOutputType | null
+    _min: ImovelMinAggregateOutputType | null
+    _max: ImovelMaxAggregateOutputType | null
+  }
+
+  type GetImovelGroupByPayload<T extends imovelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ImovelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ImovelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ImovelGroupByOutputType[P]>
+            : GetScalarType<T[P], ImovelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type imovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    idEndereco?: boolean
+    inscricaoIPTU?: boolean
+    inscricaoBombeiro?: boolean
+    metragem?: boolean
+    dataCadastro?: boolean
+    classificacao?: boolean
+    tipologia?: boolean
+    status?: boolean
+    endereco?: boolean | enderecoDefaultArgs<ExtArgs>
+    contratolocacao?: boolean | imovel$contratolocacaoArgs<ExtArgs>
+    propriedadeimovel?: boolean | imovel$propriedadeimovelArgs<ExtArgs>
+    _count?: boolean | ImovelCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["imovel"]>
+
+
+
+  export type imovelSelectScalar = {
+    id?: boolean
+    idEndereco?: boolean
+    inscricaoIPTU?: boolean
+    inscricaoBombeiro?: boolean
+    metragem?: boolean
+    dataCadastro?: boolean
+    classificacao?: boolean
+    tipologia?: boolean
+    status?: boolean
+  }
+
+  export type imovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idEndereco" | "inscricaoIPTU" | "inscricaoBombeiro" | "metragem" | "dataCadastro" | "classificacao" | "tipologia" | "status", ExtArgs["result"]["imovel"]>
+  export type imovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    endereco?: boolean | enderecoDefaultArgs<ExtArgs>
+    contratolocacao?: boolean | imovel$contratolocacaoArgs<ExtArgs>
+    propriedadeimovel?: boolean | imovel$propriedadeimovelArgs<ExtArgs>
+    _count?: boolean | ImovelCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $imovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "imovel"
+    objects: {
+      endereco: Prisma.$enderecoPayload<ExtArgs>
+      contratolocacao: Prisma.$contratolocacaoPayload<ExtArgs>[]
+      propriedadeimovel: Prisma.$propriedadeimovelPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      idEndereco: number
+      inscricaoIPTU: string | null
+      inscricaoBombeiro: string | null
+      metragem: string | null
+      dataCadastro: Date
+      classificacao: $Enums.classificacao_enum
+      tipologia: $Enums.tipologia_enum
+      status: $Enums.status_imovel_enum
+    }, ExtArgs["result"]["imovel"]>
+    composites: {}
+  }
+
+  type imovelGetPayload<S extends boolean | null | undefined | imovelDefaultArgs> = $Result.GetResult<Prisma.$imovelPayload, S>
+
+  type imovelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<imovelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ImovelCountAggregateInputType | true
+    }
+
+  export interface imovelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['imovel'], meta: { name: 'imovel' } }
+    /**
+     * Find zero or one Imovel that matches the filter.
+     * @param {imovelFindUniqueArgs} args - Arguments to find a Imovel
+     * @example
+     * // Get one Imovel
+     * const imovel = await prisma.imovel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends imovelFindUniqueArgs>(args: SelectSubset<T, imovelFindUniqueArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Imovel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {imovelFindUniqueOrThrowArgs} args - Arguments to find a Imovel
+     * @example
+     * // Get one Imovel
+     * const imovel = await prisma.imovel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends imovelFindUniqueOrThrowArgs>(args: SelectSubset<T, imovelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Imovel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelFindFirstArgs} args - Arguments to find a Imovel
+     * @example
+     * // Get one Imovel
+     * const imovel = await prisma.imovel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends imovelFindFirstArgs>(args?: SelectSubset<T, imovelFindFirstArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Imovel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelFindFirstOrThrowArgs} args - Arguments to find a Imovel
+     * @example
+     * // Get one Imovel
+     * const imovel = await prisma.imovel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends imovelFindFirstOrThrowArgs>(args?: SelectSubset<T, imovelFindFirstOrThrowArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Imovels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Imovels
+     * const imovels = await prisma.imovel.findMany()
+     * 
+     * // Get first 10 Imovels
+     * const imovels = await prisma.imovel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const imovelWithIdOnly = await prisma.imovel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends imovelFindManyArgs>(args?: SelectSubset<T, imovelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Imovel.
+     * @param {imovelCreateArgs} args - Arguments to create a Imovel.
+     * @example
+     * // Create one Imovel
+     * const Imovel = await prisma.imovel.create({
+     *   data: {
+     *     // ... data to create a Imovel
+     *   }
+     * })
+     * 
+     */
+    create<T extends imovelCreateArgs>(args: SelectSubset<T, imovelCreateArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Imovels.
+     * @param {imovelCreateManyArgs} args - Arguments to create many Imovels.
+     * @example
+     * // Create many Imovels
+     * const imovel = await prisma.imovel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends imovelCreateManyArgs>(args?: SelectSubset<T, imovelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Imovel.
+     * @param {imovelDeleteArgs} args - Arguments to delete one Imovel.
+     * @example
+     * // Delete one Imovel
+     * const Imovel = await prisma.imovel.delete({
+     *   where: {
+     *     // ... filter to delete one Imovel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends imovelDeleteArgs>(args: SelectSubset<T, imovelDeleteArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Imovel.
+     * @param {imovelUpdateArgs} args - Arguments to update one Imovel.
+     * @example
+     * // Update one Imovel
+     * const imovel = await prisma.imovel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends imovelUpdateArgs>(args: SelectSubset<T, imovelUpdateArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Imovels.
+     * @param {imovelDeleteManyArgs} args - Arguments to filter Imovels to delete.
+     * @example
+     * // Delete a few Imovels
+     * const { count } = await prisma.imovel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends imovelDeleteManyArgs>(args?: SelectSubset<T, imovelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Imovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Imovels
+     * const imovel = await prisma.imovel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends imovelUpdateManyArgs>(args: SelectSubset<T, imovelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Imovel.
+     * @param {imovelUpsertArgs} args - Arguments to update or create a Imovel.
+     * @example
+     * // Update or create a Imovel
+     * const imovel = await prisma.imovel.upsert({
+     *   create: {
+     *     // ... data to create a Imovel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Imovel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends imovelUpsertArgs>(args: SelectSubset<T, imovelUpsertArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Imovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelCountArgs} args - Arguments to filter Imovels to count.
+     * @example
+     * // Count the number of Imovels
+     * const count = await prisma.imovel.count({
+     *   where: {
+     *     // ... the filter for the Imovels we want to count
+     *   }
+     * })
+    **/
+    count<T extends imovelCountArgs>(
+      args?: Subset<T, imovelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ImovelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Imovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImovelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ImovelAggregateArgs>(args: Subset<T, ImovelAggregateArgs>): Prisma.PrismaPromise<GetImovelAggregateType<T>>
+
+    /**
+     * Group by Imovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {imovelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends imovelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: imovelGroupByArgs['orderBy'] }
+        : { orderBy?: imovelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, imovelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetImovelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the imovel model
+   */
+  readonly fields: imovelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for imovel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__imovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    endereco<T extends enderecoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, enderecoDefaultArgs<ExtArgs>>): Prisma__enderecoClient<$Result.GetResult<Prisma.$enderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contratolocacao<T extends imovel$contratolocacaoArgs<ExtArgs> = {}>(args?: Subset<T, imovel$contratolocacaoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    propriedadeimovel<T extends imovel$propriedadeimovelArgs<ExtArgs> = {}>(args?: Subset<T, imovel$propriedadeimovelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the imovel model
+   */
+  interface imovelFieldRefs {
+    readonly id: FieldRef<"imovel", 'Int'>
+    readonly idEndereco: FieldRef<"imovel", 'Int'>
+    readonly inscricaoIPTU: FieldRef<"imovel", 'String'>
+    readonly inscricaoBombeiro: FieldRef<"imovel", 'String'>
+    readonly metragem: FieldRef<"imovel", 'String'>
+    readonly dataCadastro: FieldRef<"imovel", 'DateTime'>
+    readonly classificacao: FieldRef<"imovel", 'classificacao_enum'>
+    readonly tipologia: FieldRef<"imovel", 'tipologia_enum'>
+    readonly status: FieldRef<"imovel", 'status_imovel_enum'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * imovel findUnique
+   */
+  export type imovelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter, which imovel to fetch.
+     */
+    where: imovelWhereUniqueInput
+  }
+
+  /**
+   * imovel findUniqueOrThrow
+   */
+  export type imovelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter, which imovel to fetch.
+     */
+    where: imovelWhereUniqueInput
+  }
+
+  /**
+   * imovel findFirst
+   */
+  export type imovelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter, which imovel to fetch.
+     */
+    where?: imovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of imovels to fetch.
+     */
+    orderBy?: imovelOrderByWithRelationInput | imovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for imovels.
+     */
+    cursor?: imovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` imovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` imovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of imovels.
+     */
+    distinct?: ImovelScalarFieldEnum | ImovelScalarFieldEnum[]
+  }
+
+  /**
+   * imovel findFirstOrThrow
+   */
+  export type imovelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter, which imovel to fetch.
+     */
+    where?: imovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of imovels to fetch.
+     */
+    orderBy?: imovelOrderByWithRelationInput | imovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for imovels.
+     */
+    cursor?: imovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` imovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` imovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of imovels.
+     */
+    distinct?: ImovelScalarFieldEnum | ImovelScalarFieldEnum[]
+  }
+
+  /**
+   * imovel findMany
+   */
+  export type imovelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter, which imovels to fetch.
+     */
+    where?: imovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of imovels to fetch.
+     */
+    orderBy?: imovelOrderByWithRelationInput | imovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing imovels.
+     */
+    cursor?: imovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` imovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` imovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of imovels.
+     */
+    distinct?: ImovelScalarFieldEnum | ImovelScalarFieldEnum[]
+  }
+
+  /**
+   * imovel create
+   */
+  export type imovelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a imovel.
+     */
+    data: XOR<imovelCreateInput, imovelUncheckedCreateInput>
+  }
+
+  /**
+   * imovel createMany
+   */
+  export type imovelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many imovels.
+     */
+    data: imovelCreateManyInput | imovelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * imovel update
+   */
+  export type imovelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a imovel.
+     */
+    data: XOR<imovelUpdateInput, imovelUncheckedUpdateInput>
+    /**
+     * Choose, which imovel to update.
+     */
+    where: imovelWhereUniqueInput
+  }
+
+  /**
+   * imovel updateMany
+   */
+  export type imovelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update imovels.
+     */
+    data: XOR<imovelUpdateManyMutationInput, imovelUncheckedUpdateManyInput>
+    /**
+     * Filter which imovels to update
+     */
+    where?: imovelWhereInput
+    /**
+     * Limit how many imovels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * imovel upsert
+   */
+  export type imovelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the imovel to update in case it exists.
+     */
+    where: imovelWhereUniqueInput
+    /**
+     * In case the imovel found by the `where` argument doesn't exist, create a new imovel with this data.
+     */
+    create: XOR<imovelCreateInput, imovelUncheckedCreateInput>
+    /**
+     * In case the imovel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<imovelUpdateInput, imovelUncheckedUpdateInput>
+  }
+
+  /**
+   * imovel delete
+   */
+  export type imovelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+    /**
+     * Filter which imovel to delete.
+     */
+    where: imovelWhereUniqueInput
+  }
+
+  /**
+   * imovel deleteMany
+   */
+  export type imovelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which imovels to delete
+     */
+    where?: imovelWhereInput
+    /**
+     * Limit how many imovels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * imovel.contratolocacao
+   */
+  export type imovel$contratolocacaoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    where?: contratolocacaoWhereInput
+    orderBy?: contratolocacaoOrderByWithRelationInput | contratolocacaoOrderByWithRelationInput[]
+    cursor?: contratolocacaoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContratolocacaoScalarFieldEnum | ContratolocacaoScalarFieldEnum[]
+  }
+
+  /**
+   * imovel.propriedadeimovel
+   */
+  export type imovel$propriedadeimovelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    where?: propriedadeimovelWhereInput
+    orderBy?: propriedadeimovelOrderByWithRelationInput | propriedadeimovelOrderByWithRelationInput[]
+    cursor?: propriedadeimovelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PropriedadeimovelScalarFieldEnum | PropriedadeimovelScalarFieldEnum[]
+  }
+
+  /**
+   * imovel without action
+   */
+  export type imovelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the imovel
+     */
+    select?: imovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the imovel
+     */
+    omit?: imovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: imovelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model propriedadeimovel
+   */
+
+  export type AggregatePropriedadeimovel = {
+    _count: PropriedadeimovelCountAggregateOutputType | null
+    _avg: PropriedadeimovelAvgAggregateOutputType | null
+    _sum: PropriedadeimovelSumAggregateOutputType | null
+    _min: PropriedadeimovelMinAggregateOutputType | null
+    _max: PropriedadeimovelMaxAggregateOutputType | null
+  }
+
+  export type PropriedadeimovelAvgAggregateOutputType = {
+    id: number | null
+    idImovel: number | null
+    idLocador: number | null
+    percentualParticipacao: Decimal | null
+  }
+
+  export type PropriedadeimovelSumAggregateOutputType = {
+    id: number | null
+    idImovel: number | null
+    idLocador: bigint | null
+    percentualParticipacao: Decimal | null
+  }
+
+  export type PropriedadeimovelMinAggregateOutputType = {
+    id: number | null
+    idImovel: number | null
+    idLocador: bigint | null
+    percentualParticipacao: Decimal | null
+  }
+
+  export type PropriedadeimovelMaxAggregateOutputType = {
+    id: number | null
+    idImovel: number | null
+    idLocador: bigint | null
+    percentualParticipacao: Decimal | null
+  }
+
+  export type PropriedadeimovelCountAggregateOutputType = {
+    id: number
+    idImovel: number
+    idLocador: number
+    percentualParticipacao: number
+    _all: number
+  }
+
+
+  export type PropriedadeimovelAvgAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    percentualParticipacao?: true
+  }
+
+  export type PropriedadeimovelSumAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    percentualParticipacao?: true
+  }
+
+  export type PropriedadeimovelMinAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    percentualParticipacao?: true
+  }
+
+  export type PropriedadeimovelMaxAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    percentualParticipacao?: true
+  }
+
+  export type PropriedadeimovelCountAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    percentualParticipacao?: true
+    _all?: true
+  }
+
+  export type PropriedadeimovelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which propriedadeimovel to aggregate.
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of propriedadeimovels to fetch.
+     */
+    orderBy?: propriedadeimovelOrderByWithRelationInput | propriedadeimovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: propriedadeimovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` propriedadeimovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` propriedadeimovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned propriedadeimovels
+    **/
+    _count?: true | PropriedadeimovelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PropriedadeimovelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PropriedadeimovelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PropriedadeimovelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PropriedadeimovelMaxAggregateInputType
+  }
+
+  export type GetPropriedadeimovelAggregateType<T extends PropriedadeimovelAggregateArgs> = {
+        [P in keyof T & keyof AggregatePropriedadeimovel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePropriedadeimovel[P]>
+      : GetScalarType<T[P], AggregatePropriedadeimovel[P]>
+  }
+
+
+
+
+  export type propriedadeimovelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: propriedadeimovelWhereInput
+    orderBy?: propriedadeimovelOrderByWithAggregationInput | propriedadeimovelOrderByWithAggregationInput[]
+    by: PropriedadeimovelScalarFieldEnum[] | PropriedadeimovelScalarFieldEnum
+    having?: propriedadeimovelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PropriedadeimovelCountAggregateInputType | true
+    _avg?: PropriedadeimovelAvgAggregateInputType
+    _sum?: PropriedadeimovelSumAggregateInputType
+    _min?: PropriedadeimovelMinAggregateInputType
+    _max?: PropriedadeimovelMaxAggregateInputType
+  }
+
+  export type PropriedadeimovelGroupByOutputType = {
+    id: number
+    idImovel: number
+    idLocador: bigint
+    percentualParticipacao: Decimal
+    _count: PropriedadeimovelCountAggregateOutputType | null
+    _avg: PropriedadeimovelAvgAggregateOutputType | null
+    _sum: PropriedadeimovelSumAggregateOutputType | null
+    _min: PropriedadeimovelMinAggregateOutputType | null
+    _max: PropriedadeimovelMaxAggregateOutputType | null
+  }
+
+  type GetPropriedadeimovelGroupByPayload<T extends propriedadeimovelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PropriedadeimovelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PropriedadeimovelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PropriedadeimovelGroupByOutputType[P]>
+            : GetScalarType<T[P], PropriedadeimovelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type propriedadeimovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    idImovel?: boolean
+    idLocador?: boolean
+    percentualParticipacao?: boolean
+    imovel?: boolean | imovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["propriedadeimovel"]>
+
+
+
+  export type propriedadeimovelSelectScalar = {
+    id?: boolean
+    idImovel?: boolean
+    idLocador?: boolean
+    percentualParticipacao?: boolean
+  }
+
+  export type propriedadeimovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idImovel" | "idLocador" | "percentualParticipacao", ExtArgs["result"]["propriedadeimovel"]>
+  export type propriedadeimovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imovel?: boolean | imovelDefaultArgs<ExtArgs>
+  }
+
+  export type $propriedadeimovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "propriedadeimovel"
+    objects: {
+      imovel: Prisma.$imovelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      idImovel: number
+      idLocador: bigint
+      percentualParticipacao: Prisma.Decimal
+    }, ExtArgs["result"]["propriedadeimovel"]>
+    composites: {}
+  }
+
+  type propriedadeimovelGetPayload<S extends boolean | null | undefined | propriedadeimovelDefaultArgs> = $Result.GetResult<Prisma.$propriedadeimovelPayload, S>
+
+  type propriedadeimovelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<propriedadeimovelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PropriedadeimovelCountAggregateInputType | true
+    }
+
+  export interface propriedadeimovelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['propriedadeimovel'], meta: { name: 'propriedadeimovel' } }
+    /**
+     * Find zero or one Propriedadeimovel that matches the filter.
+     * @param {propriedadeimovelFindUniqueArgs} args - Arguments to find a Propriedadeimovel
+     * @example
+     * // Get one Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends propriedadeimovelFindUniqueArgs>(args: SelectSubset<T, propriedadeimovelFindUniqueArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Propriedadeimovel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {propriedadeimovelFindUniqueOrThrowArgs} args - Arguments to find a Propriedadeimovel
+     * @example
+     * // Get one Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends propriedadeimovelFindUniqueOrThrowArgs>(args: SelectSubset<T, propriedadeimovelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Propriedadeimovel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelFindFirstArgs} args - Arguments to find a Propriedadeimovel
+     * @example
+     * // Get one Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends propriedadeimovelFindFirstArgs>(args?: SelectSubset<T, propriedadeimovelFindFirstArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Propriedadeimovel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelFindFirstOrThrowArgs} args - Arguments to find a Propriedadeimovel
+     * @example
+     * // Get one Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends propriedadeimovelFindFirstOrThrowArgs>(args?: SelectSubset<T, propriedadeimovelFindFirstOrThrowArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Propriedadeimovels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Propriedadeimovels
+     * const propriedadeimovels = await prisma.propriedadeimovel.findMany()
+     * 
+     * // Get first 10 Propriedadeimovels
+     * const propriedadeimovels = await prisma.propriedadeimovel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const propriedadeimovelWithIdOnly = await prisma.propriedadeimovel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends propriedadeimovelFindManyArgs>(args?: SelectSubset<T, propriedadeimovelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Propriedadeimovel.
+     * @param {propriedadeimovelCreateArgs} args - Arguments to create a Propriedadeimovel.
+     * @example
+     * // Create one Propriedadeimovel
+     * const Propriedadeimovel = await prisma.propriedadeimovel.create({
+     *   data: {
+     *     // ... data to create a Propriedadeimovel
+     *   }
+     * })
+     * 
+     */
+    create<T extends propriedadeimovelCreateArgs>(args: SelectSubset<T, propriedadeimovelCreateArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Propriedadeimovels.
+     * @param {propriedadeimovelCreateManyArgs} args - Arguments to create many Propriedadeimovels.
+     * @example
+     * // Create many Propriedadeimovels
+     * const propriedadeimovel = await prisma.propriedadeimovel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends propriedadeimovelCreateManyArgs>(args?: SelectSubset<T, propriedadeimovelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Propriedadeimovel.
+     * @param {propriedadeimovelDeleteArgs} args - Arguments to delete one Propriedadeimovel.
+     * @example
+     * // Delete one Propriedadeimovel
+     * const Propriedadeimovel = await prisma.propriedadeimovel.delete({
+     *   where: {
+     *     // ... filter to delete one Propriedadeimovel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends propriedadeimovelDeleteArgs>(args: SelectSubset<T, propriedadeimovelDeleteArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Propriedadeimovel.
+     * @param {propriedadeimovelUpdateArgs} args - Arguments to update one Propriedadeimovel.
+     * @example
+     * // Update one Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends propriedadeimovelUpdateArgs>(args: SelectSubset<T, propriedadeimovelUpdateArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Propriedadeimovels.
+     * @param {propriedadeimovelDeleteManyArgs} args - Arguments to filter Propriedadeimovels to delete.
+     * @example
+     * // Delete a few Propriedadeimovels
+     * const { count } = await prisma.propriedadeimovel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends propriedadeimovelDeleteManyArgs>(args?: SelectSubset<T, propriedadeimovelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Propriedadeimovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Propriedadeimovels
+     * const propriedadeimovel = await prisma.propriedadeimovel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends propriedadeimovelUpdateManyArgs>(args: SelectSubset<T, propriedadeimovelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Propriedadeimovel.
+     * @param {propriedadeimovelUpsertArgs} args - Arguments to update or create a Propriedadeimovel.
+     * @example
+     * // Update or create a Propriedadeimovel
+     * const propriedadeimovel = await prisma.propriedadeimovel.upsert({
+     *   create: {
+     *     // ... data to create a Propriedadeimovel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Propriedadeimovel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends propriedadeimovelUpsertArgs>(args: SelectSubset<T, propriedadeimovelUpsertArgs<ExtArgs>>): Prisma__propriedadeimovelClient<$Result.GetResult<Prisma.$propriedadeimovelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Propriedadeimovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelCountArgs} args - Arguments to filter Propriedadeimovels to count.
+     * @example
+     * // Count the number of Propriedadeimovels
+     * const count = await prisma.propriedadeimovel.count({
+     *   where: {
+     *     // ... the filter for the Propriedadeimovels we want to count
+     *   }
+     * })
+    **/
+    count<T extends propriedadeimovelCountArgs>(
+      args?: Subset<T, propriedadeimovelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PropriedadeimovelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Propriedadeimovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PropriedadeimovelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PropriedadeimovelAggregateArgs>(args: Subset<T, PropriedadeimovelAggregateArgs>): Prisma.PrismaPromise<GetPropriedadeimovelAggregateType<T>>
+
+    /**
+     * Group by Propriedadeimovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {propriedadeimovelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends propriedadeimovelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: propriedadeimovelGroupByArgs['orderBy'] }
+        : { orderBy?: propriedadeimovelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, propriedadeimovelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPropriedadeimovelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the propriedadeimovel model
+   */
+  readonly fields: propriedadeimovelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for propriedadeimovel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__propriedadeimovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    imovel<T extends imovelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, imovelDefaultArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the propriedadeimovel model
+   */
+  interface propriedadeimovelFieldRefs {
+    readonly id: FieldRef<"propriedadeimovel", 'Int'>
+    readonly idImovel: FieldRef<"propriedadeimovel", 'Int'>
+    readonly idLocador: FieldRef<"propriedadeimovel", 'BigInt'>
+    readonly percentualParticipacao: FieldRef<"propriedadeimovel", 'Decimal'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * propriedadeimovel findUnique
+   */
+  export type propriedadeimovelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter, which propriedadeimovel to fetch.
+     */
+    where: propriedadeimovelWhereUniqueInput
+  }
+
+  /**
+   * propriedadeimovel findUniqueOrThrow
+   */
+  export type propriedadeimovelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter, which propriedadeimovel to fetch.
+     */
+    where: propriedadeimovelWhereUniqueInput
+  }
+
+  /**
+   * propriedadeimovel findFirst
+   */
+  export type propriedadeimovelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter, which propriedadeimovel to fetch.
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of propriedadeimovels to fetch.
+     */
+    orderBy?: propriedadeimovelOrderByWithRelationInput | propriedadeimovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for propriedadeimovels.
+     */
+    cursor?: propriedadeimovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` propriedadeimovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` propriedadeimovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of propriedadeimovels.
+     */
+    distinct?: PropriedadeimovelScalarFieldEnum | PropriedadeimovelScalarFieldEnum[]
+  }
+
+  /**
+   * propriedadeimovel findFirstOrThrow
+   */
+  export type propriedadeimovelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter, which propriedadeimovel to fetch.
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of propriedadeimovels to fetch.
+     */
+    orderBy?: propriedadeimovelOrderByWithRelationInput | propriedadeimovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for propriedadeimovels.
+     */
+    cursor?: propriedadeimovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` propriedadeimovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` propriedadeimovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of propriedadeimovels.
+     */
+    distinct?: PropriedadeimovelScalarFieldEnum | PropriedadeimovelScalarFieldEnum[]
+  }
+
+  /**
+   * propriedadeimovel findMany
+   */
+  export type propriedadeimovelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter, which propriedadeimovels to fetch.
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of propriedadeimovels to fetch.
+     */
+    orderBy?: propriedadeimovelOrderByWithRelationInput | propriedadeimovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing propriedadeimovels.
+     */
+    cursor?: propriedadeimovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` propriedadeimovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` propriedadeimovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of propriedadeimovels.
+     */
+    distinct?: PropriedadeimovelScalarFieldEnum | PropriedadeimovelScalarFieldEnum[]
+  }
+
+  /**
+   * propriedadeimovel create
+   */
+  export type propriedadeimovelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a propriedadeimovel.
+     */
+    data: XOR<propriedadeimovelCreateInput, propriedadeimovelUncheckedCreateInput>
+  }
+
+  /**
+   * propriedadeimovel createMany
+   */
+  export type propriedadeimovelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many propriedadeimovels.
+     */
+    data: propriedadeimovelCreateManyInput | propriedadeimovelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * propriedadeimovel update
+   */
+  export type propriedadeimovelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a propriedadeimovel.
+     */
+    data: XOR<propriedadeimovelUpdateInput, propriedadeimovelUncheckedUpdateInput>
+    /**
+     * Choose, which propriedadeimovel to update.
+     */
+    where: propriedadeimovelWhereUniqueInput
+  }
+
+  /**
+   * propriedadeimovel updateMany
+   */
+  export type propriedadeimovelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update propriedadeimovels.
+     */
+    data: XOR<propriedadeimovelUpdateManyMutationInput, propriedadeimovelUncheckedUpdateManyInput>
+    /**
+     * Filter which propriedadeimovels to update
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * Limit how many propriedadeimovels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * propriedadeimovel upsert
+   */
+  export type propriedadeimovelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the propriedadeimovel to update in case it exists.
+     */
+    where: propriedadeimovelWhereUniqueInput
+    /**
+     * In case the propriedadeimovel found by the `where` argument doesn't exist, create a new propriedadeimovel with this data.
+     */
+    create: XOR<propriedadeimovelCreateInput, propriedadeimovelUncheckedCreateInput>
+    /**
+     * In case the propriedadeimovel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<propriedadeimovelUpdateInput, propriedadeimovelUncheckedUpdateInput>
+  }
+
+  /**
+   * propriedadeimovel delete
+   */
+  export type propriedadeimovelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+    /**
+     * Filter which propriedadeimovel to delete.
+     */
+    where: propriedadeimovelWhereUniqueInput
+  }
+
+  /**
+   * propriedadeimovel deleteMany
+   */
+  export type propriedadeimovelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which propriedadeimovels to delete
+     */
+    where?: propriedadeimovelWhereInput
+    /**
+     * Limit how many propriedadeimovels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * propriedadeimovel without action
+   */
+  export type propriedadeimovelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the propriedadeimovel
+     */
+    select?: propriedadeimovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the propriedadeimovel
+     */
+    omit?: propriedadeimovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: propriedadeimovelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model contratolocacao
+   */
+
+  export type AggregateContratolocacao = {
+    _count: ContratolocacaoCountAggregateOutputType | null
+    _avg: ContratolocacaoAvgAggregateOutputType | null
+    _sum: ContratolocacaoSumAggregateOutputType | null
+    _min: ContratolocacaoMinAggregateOutputType | null
+    _max: ContratolocacaoMaxAggregateOutputType | null
+  }
+
+  export type ContratolocacaoAvgAggregateOutputType = {
+    id: number | null
+    idImovel: number | null
+    idLocador: number | null
+    idLocatario: number | null
+    valorAluguel: Decimal | null
+  }
+
+  export type ContratolocacaoSumAggregateOutputType = {
+    id: bigint | null
+    idImovel: number | null
+    idLocador: bigint | null
+    idLocatario: bigint | null
+    valorAluguel: Decimal | null
+  }
+
+  export type ContratolocacaoMinAggregateOutputType = {
+    id: bigint | null
+    idImovel: number | null
+    idLocador: bigint | null
+    idLocatario: bigint | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    dataReajuste: Date | null
+    valorAluguel: Decimal | null
+    status: $Enums.status_contrato_enum | null
+    contratoDigitalizado: Bytes | null
+  }
+
+  export type ContratolocacaoMaxAggregateOutputType = {
+    id: bigint | null
+    idImovel: number | null
+    idLocador: bigint | null
+    idLocatario: bigint | null
+    dataInicio: Date | null
+    dataFim: Date | null
+    dataReajuste: Date | null
+    valorAluguel: Decimal | null
+    status: $Enums.status_contrato_enum | null
+    contratoDigitalizado: Bytes | null
+  }
+
+  export type ContratolocacaoCountAggregateOutputType = {
+    id: number
+    idImovel: number
+    idLocador: number
+    idLocatario: number
+    dataInicio: number
+    dataFim: number
+    dataReajuste: number
+    valorAluguel: number
+    status: number
+    contratoDigitalizado: number
+    _all: number
+  }
+
+
+  export type ContratolocacaoAvgAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    idLocatario?: true
+    valorAluguel?: true
+  }
+
+  export type ContratolocacaoSumAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    idLocatario?: true
+    valorAluguel?: true
+  }
+
+  export type ContratolocacaoMinAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    idLocatario?: true
+    dataInicio?: true
+    dataFim?: true
+    dataReajuste?: true
+    valorAluguel?: true
+    status?: true
+    contratoDigitalizado?: true
+  }
+
+  export type ContratolocacaoMaxAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    idLocatario?: true
+    dataInicio?: true
+    dataFim?: true
+    dataReajuste?: true
+    valorAluguel?: true
+    status?: true
+    contratoDigitalizado?: true
+  }
+
+  export type ContratolocacaoCountAggregateInputType = {
+    id?: true
+    idImovel?: true
+    idLocador?: true
+    idLocatario?: true
+    dataInicio?: true
+    dataFim?: true
+    dataReajuste?: true
+    valorAluguel?: true
+    status?: true
+    contratoDigitalizado?: true
+    _all?: true
+  }
+
+  export type ContratolocacaoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contratolocacao to aggregate.
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contratolocacaos to fetch.
+     */
+    orderBy?: contratolocacaoOrderByWithRelationInput | contratolocacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: contratolocacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contratolocacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contratolocacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned contratolocacaos
+    **/
+    _count?: true | ContratolocacaoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContratolocacaoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContratolocacaoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContratolocacaoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContratolocacaoMaxAggregateInputType
+  }
+
+  export type GetContratolocacaoAggregateType<T extends ContratolocacaoAggregateArgs> = {
+        [P in keyof T & keyof AggregateContratolocacao]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContratolocacao[P]>
+      : GetScalarType<T[P], AggregateContratolocacao[P]>
+  }
+
+
+
+
+  export type contratolocacaoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: contratolocacaoWhereInput
+    orderBy?: contratolocacaoOrderByWithAggregationInput | contratolocacaoOrderByWithAggregationInput[]
+    by: ContratolocacaoScalarFieldEnum[] | ContratolocacaoScalarFieldEnum
+    having?: contratolocacaoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContratolocacaoCountAggregateInputType | true
+    _avg?: ContratolocacaoAvgAggregateInputType
+    _sum?: ContratolocacaoSumAggregateInputType
+    _min?: ContratolocacaoMinAggregateInputType
+    _max?: ContratolocacaoMaxAggregateInputType
+  }
+
+  export type ContratolocacaoGroupByOutputType = {
+    id: bigint
+    idImovel: number
+    idLocador: bigint
+    idLocatario: bigint
+    dataInicio: Date
+    dataFim: Date | null
+    dataReajuste: Date | null
+    valorAluguel: Decimal
+    status: $Enums.status_contrato_enum
+    contratoDigitalizado: Bytes | null
+    _count: ContratolocacaoCountAggregateOutputType | null
+    _avg: ContratolocacaoAvgAggregateOutputType | null
+    _sum: ContratolocacaoSumAggregateOutputType | null
+    _min: ContratolocacaoMinAggregateOutputType | null
+    _max: ContratolocacaoMaxAggregateOutputType | null
+  }
+
+  type GetContratolocacaoGroupByPayload<T extends contratolocacaoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContratolocacaoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContratolocacaoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContratolocacaoGroupByOutputType[P]>
+            : GetScalarType<T[P], ContratolocacaoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type contratolocacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    idImovel?: boolean
+    idLocador?: boolean
+    idLocatario?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataReajuste?: boolean
+    valorAluguel?: boolean
+    status?: boolean
+    contratoDigitalizado?: boolean
+    imovel?: boolean | imovelDefaultArgs<ExtArgs>
+    despesa?: boolean | contratolocacao$despesaArgs<ExtArgs>
+    _count?: boolean | ContratolocacaoCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contratolocacao"]>
+
+
+
+  export type contratolocacaoSelectScalar = {
+    id?: boolean
+    idImovel?: boolean
+    idLocador?: boolean
+    idLocatario?: boolean
+    dataInicio?: boolean
+    dataFim?: boolean
+    dataReajuste?: boolean
+    valorAluguel?: boolean
+    status?: boolean
+    contratoDigitalizado?: boolean
+  }
+
+  export type contratolocacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idImovel" | "idLocador" | "idLocatario" | "dataInicio" | "dataFim" | "dataReajuste" | "valorAluguel" | "status" | "contratoDigitalizado", ExtArgs["result"]["contratolocacao"]>
+  export type contratolocacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imovel?: boolean | imovelDefaultArgs<ExtArgs>
+    despesa?: boolean | contratolocacao$despesaArgs<ExtArgs>
+    _count?: boolean | ContratolocacaoCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $contratolocacaoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "contratolocacao"
+    objects: {
+      imovel: Prisma.$imovelPayload<ExtArgs>
+      despesa: Prisma.$despesaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      idImovel: number
+      idLocador: bigint
+      idLocatario: bigint
+      dataInicio: Date
+      dataFim: Date | null
+      dataReajuste: Date | null
+      valorAluguel: Prisma.Decimal
+      status: $Enums.status_contrato_enum
+      contratoDigitalizado: Prisma.Bytes | null
+    }, ExtArgs["result"]["contratolocacao"]>
+    composites: {}
+  }
+
+  type contratolocacaoGetPayload<S extends boolean | null | undefined | contratolocacaoDefaultArgs> = $Result.GetResult<Prisma.$contratolocacaoPayload, S>
+
+  type contratolocacaoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<contratolocacaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContratolocacaoCountAggregateInputType | true
+    }
+
+  export interface contratolocacaoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['contratolocacao'], meta: { name: 'contratolocacao' } }
+    /**
+     * Find zero or one Contratolocacao that matches the filter.
+     * @param {contratolocacaoFindUniqueArgs} args - Arguments to find a Contratolocacao
+     * @example
+     * // Get one Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends contratolocacaoFindUniqueArgs>(args: SelectSubset<T, contratolocacaoFindUniqueArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contratolocacao that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {contratolocacaoFindUniqueOrThrowArgs} args - Arguments to find a Contratolocacao
+     * @example
+     * // Get one Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends contratolocacaoFindUniqueOrThrowArgs>(args: SelectSubset<T, contratolocacaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contratolocacao that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoFindFirstArgs} args - Arguments to find a Contratolocacao
+     * @example
+     * // Get one Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends contratolocacaoFindFirstArgs>(args?: SelectSubset<T, contratolocacaoFindFirstArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contratolocacao that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoFindFirstOrThrowArgs} args - Arguments to find a Contratolocacao
+     * @example
+     * // Get one Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends contratolocacaoFindFirstOrThrowArgs>(args?: SelectSubset<T, contratolocacaoFindFirstOrThrowArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contratolocacaos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contratolocacaos
+     * const contratolocacaos = await prisma.contratolocacao.findMany()
+     * 
+     * // Get first 10 Contratolocacaos
+     * const contratolocacaos = await prisma.contratolocacao.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contratolocacaoWithIdOnly = await prisma.contratolocacao.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends contratolocacaoFindManyArgs>(args?: SelectSubset<T, contratolocacaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contratolocacao.
+     * @param {contratolocacaoCreateArgs} args - Arguments to create a Contratolocacao.
+     * @example
+     * // Create one Contratolocacao
+     * const Contratolocacao = await prisma.contratolocacao.create({
+     *   data: {
+     *     // ... data to create a Contratolocacao
+     *   }
+     * })
+     * 
+     */
+    create<T extends contratolocacaoCreateArgs>(args: SelectSubset<T, contratolocacaoCreateArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contratolocacaos.
+     * @param {contratolocacaoCreateManyArgs} args - Arguments to create many Contratolocacaos.
+     * @example
+     * // Create many Contratolocacaos
+     * const contratolocacao = await prisma.contratolocacao.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends contratolocacaoCreateManyArgs>(args?: SelectSubset<T, contratolocacaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Contratolocacao.
+     * @param {contratolocacaoDeleteArgs} args - Arguments to delete one Contratolocacao.
+     * @example
+     * // Delete one Contratolocacao
+     * const Contratolocacao = await prisma.contratolocacao.delete({
+     *   where: {
+     *     // ... filter to delete one Contratolocacao
+     *   }
+     * })
+     * 
+     */
+    delete<T extends contratolocacaoDeleteArgs>(args: SelectSubset<T, contratolocacaoDeleteArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contratolocacao.
+     * @param {contratolocacaoUpdateArgs} args - Arguments to update one Contratolocacao.
+     * @example
+     * // Update one Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends contratolocacaoUpdateArgs>(args: SelectSubset<T, contratolocacaoUpdateArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contratolocacaos.
+     * @param {contratolocacaoDeleteManyArgs} args - Arguments to filter Contratolocacaos to delete.
+     * @example
+     * // Delete a few Contratolocacaos
+     * const { count } = await prisma.contratolocacao.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends contratolocacaoDeleteManyArgs>(args?: SelectSubset<T, contratolocacaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contratolocacaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contratolocacaos
+     * const contratolocacao = await prisma.contratolocacao.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends contratolocacaoUpdateManyArgs>(args: SelectSubset<T, contratolocacaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Contratolocacao.
+     * @param {contratolocacaoUpsertArgs} args - Arguments to update or create a Contratolocacao.
+     * @example
+     * // Update or create a Contratolocacao
+     * const contratolocacao = await prisma.contratolocacao.upsert({
+     *   create: {
+     *     // ... data to create a Contratolocacao
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contratolocacao we want to update
+     *   }
+     * })
+     */
+    upsert<T extends contratolocacaoUpsertArgs>(args: SelectSubset<T, contratolocacaoUpsertArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contratolocacaos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoCountArgs} args - Arguments to filter Contratolocacaos to count.
+     * @example
+     * // Count the number of Contratolocacaos
+     * const count = await prisma.contratolocacao.count({
+     *   where: {
+     *     // ... the filter for the Contratolocacaos we want to count
+     *   }
+     * })
+    **/
+    count<T extends contratolocacaoCountArgs>(
+      args?: Subset<T, contratolocacaoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContratolocacaoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contratolocacao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContratolocacaoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContratolocacaoAggregateArgs>(args: Subset<T, ContratolocacaoAggregateArgs>): Prisma.PrismaPromise<GetContratolocacaoAggregateType<T>>
+
+    /**
+     * Group by Contratolocacao.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {contratolocacaoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends contratolocacaoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: contratolocacaoGroupByArgs['orderBy'] }
+        : { orderBy?: contratolocacaoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, contratolocacaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContratolocacaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the contratolocacao model
+   */
+  readonly fields: contratolocacaoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for contratolocacao.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__contratolocacaoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    imovel<T extends imovelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, imovelDefaultArgs<ExtArgs>>): Prisma__imovelClient<$Result.GetResult<Prisma.$imovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    despesa<T extends contratolocacao$despesaArgs<ExtArgs> = {}>(args?: Subset<T, contratolocacao$despesaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the contratolocacao model
+   */
+  interface contratolocacaoFieldRefs {
+    readonly id: FieldRef<"contratolocacao", 'BigInt'>
+    readonly idImovel: FieldRef<"contratolocacao", 'Int'>
+    readonly idLocador: FieldRef<"contratolocacao", 'BigInt'>
+    readonly idLocatario: FieldRef<"contratolocacao", 'BigInt'>
+    readonly dataInicio: FieldRef<"contratolocacao", 'DateTime'>
+    readonly dataFim: FieldRef<"contratolocacao", 'DateTime'>
+    readonly dataReajuste: FieldRef<"contratolocacao", 'DateTime'>
+    readonly valorAluguel: FieldRef<"contratolocacao", 'Decimal'>
+    readonly status: FieldRef<"contratolocacao", 'status_contrato_enum'>
+    readonly contratoDigitalizado: FieldRef<"contratolocacao", 'Bytes'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * contratolocacao findUnique
+   */
+  export type contratolocacaoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which contratolocacao to fetch.
+     */
+    where: contratolocacaoWhereUniqueInput
+  }
+
+  /**
+   * contratolocacao findUniqueOrThrow
+   */
+  export type contratolocacaoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which contratolocacao to fetch.
+     */
+    where: contratolocacaoWhereUniqueInput
+  }
+
+  /**
+   * contratolocacao findFirst
+   */
+  export type contratolocacaoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which contratolocacao to fetch.
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contratolocacaos to fetch.
+     */
+    orderBy?: contratolocacaoOrderByWithRelationInput | contratolocacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contratolocacaos.
+     */
+    cursor?: contratolocacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contratolocacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contratolocacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contratolocacaos.
+     */
+    distinct?: ContratolocacaoScalarFieldEnum | ContratolocacaoScalarFieldEnum[]
+  }
+
+  /**
+   * contratolocacao findFirstOrThrow
+   */
+  export type contratolocacaoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which contratolocacao to fetch.
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contratolocacaos to fetch.
+     */
+    orderBy?: contratolocacaoOrderByWithRelationInput | contratolocacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for contratolocacaos.
+     */
+    cursor?: contratolocacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contratolocacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contratolocacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contratolocacaos.
+     */
+    distinct?: ContratolocacaoScalarFieldEnum | ContratolocacaoScalarFieldEnum[]
+  }
+
+  /**
+   * contratolocacao findMany
+   */
+  export type contratolocacaoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter, which contratolocacaos to fetch.
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of contratolocacaos to fetch.
+     */
+    orderBy?: contratolocacaoOrderByWithRelationInput | contratolocacaoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing contratolocacaos.
+     */
+    cursor?: contratolocacaoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` contratolocacaos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` contratolocacaos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of contratolocacaos.
+     */
+    distinct?: ContratolocacaoScalarFieldEnum | ContratolocacaoScalarFieldEnum[]
+  }
+
+  /**
+   * contratolocacao create
+   */
+  export type contratolocacaoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a contratolocacao.
+     */
+    data: XOR<contratolocacaoCreateInput, contratolocacaoUncheckedCreateInput>
+  }
+
+  /**
+   * contratolocacao createMany
+   */
+  export type contratolocacaoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many contratolocacaos.
+     */
+    data: contratolocacaoCreateManyInput | contratolocacaoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * contratolocacao update
+   */
+  export type contratolocacaoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a contratolocacao.
+     */
+    data: XOR<contratolocacaoUpdateInput, contratolocacaoUncheckedUpdateInput>
+    /**
+     * Choose, which contratolocacao to update.
+     */
+    where: contratolocacaoWhereUniqueInput
+  }
+
+  /**
+   * contratolocacao updateMany
+   */
+  export type contratolocacaoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update contratolocacaos.
+     */
+    data: XOR<contratolocacaoUpdateManyMutationInput, contratolocacaoUncheckedUpdateManyInput>
+    /**
+     * Filter which contratolocacaos to update
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * Limit how many contratolocacaos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * contratolocacao upsert
+   */
+  export type contratolocacaoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the contratolocacao to update in case it exists.
+     */
+    where: contratolocacaoWhereUniqueInput
+    /**
+     * In case the contratolocacao found by the `where` argument doesn't exist, create a new contratolocacao with this data.
+     */
+    create: XOR<contratolocacaoCreateInput, contratolocacaoUncheckedCreateInput>
+    /**
+     * In case the contratolocacao was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<contratolocacaoUpdateInput, contratolocacaoUncheckedUpdateInput>
+  }
+
+  /**
+   * contratolocacao delete
+   */
+  export type contratolocacaoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+    /**
+     * Filter which contratolocacao to delete.
+     */
+    where: contratolocacaoWhereUniqueInput
+  }
+
+  /**
+   * contratolocacao deleteMany
+   */
+  export type contratolocacaoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which contratolocacaos to delete
+     */
+    where?: contratolocacaoWhereInput
+    /**
+     * Limit how many contratolocacaos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * contratolocacao.despesa
+   */
+  export type contratolocacao$despesaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    where?: despesaWhereInput
+    orderBy?: despesaOrderByWithRelationInput | despesaOrderByWithRelationInput[]
+    cursor?: despesaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DespesaScalarFieldEnum | DespesaScalarFieldEnum[]
+  }
+
+  /**
+   * contratolocacao without action
+   */
+  export type contratolocacaoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the contratolocacao
+     */
+    select?: contratolocacaoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the contratolocacao
+     */
+    omit?: contratolocacaoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: contratolocacaoInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model despesa
+   */
+
+  export type AggregateDespesa = {
+    _count: DespesaCountAggregateOutputType | null
+    _avg: DespesaAvgAggregateOutputType | null
+    _sum: DespesaSumAggregateOutputType | null
+    _min: DespesaMinAggregateOutputType | null
+    _max: DespesaMaxAggregateOutputType | null
+  }
+
+  export type DespesaAvgAggregateOutputType = {
+    id: number | null
+    idContratoLocacao: number | null
+    valor: Decimal | null
+  }
+
+  export type DespesaSumAggregateOutputType = {
+    id: bigint | null
+    idContratoLocacao: bigint | null
+    valor: Decimal | null
+  }
+
+  export type DespesaMinAggregateOutputType = {
+    id: bigint | null
+    idContratoLocacao: bigint | null
+    descricao: string | null
+    valor: Decimal | null
+    tipo: $Enums.tipo_despesa_enum | null
+    dataVencimento: Date | null
+    dataPagamento: Date | null
+    status: $Enums.status_despesa_enum | null
+    comprovantePagamento: Bytes | null
+  }
+
+  export type DespesaMaxAggregateOutputType = {
+    id: bigint | null
+    idContratoLocacao: bigint | null
+    descricao: string | null
+    valor: Decimal | null
+    tipo: $Enums.tipo_despesa_enum | null
+    dataVencimento: Date | null
+    dataPagamento: Date | null
+    status: $Enums.status_despesa_enum | null
+    comprovantePagamento: Bytes | null
+  }
+
+  export type DespesaCountAggregateOutputType = {
+    id: number
+    idContratoLocacao: number
+    descricao: number
+    valor: number
+    tipo: number
+    dataVencimento: number
+    dataPagamento: number
+    status: number
+    comprovantePagamento: number
+    _all: number
+  }
+
+
+  export type DespesaAvgAggregateInputType = {
+    id?: true
+    idContratoLocacao?: true
+    valor?: true
+  }
+
+  export type DespesaSumAggregateInputType = {
+    id?: true
+    idContratoLocacao?: true
+    valor?: true
+  }
+
+  export type DespesaMinAggregateInputType = {
+    id?: true
+    idContratoLocacao?: true
+    descricao?: true
+    valor?: true
+    tipo?: true
+    dataVencimento?: true
+    dataPagamento?: true
+    status?: true
+    comprovantePagamento?: true
+  }
+
+  export type DespesaMaxAggregateInputType = {
+    id?: true
+    idContratoLocacao?: true
+    descricao?: true
+    valor?: true
+    tipo?: true
+    dataVencimento?: true
+    dataPagamento?: true
+    status?: true
+    comprovantePagamento?: true
+  }
+
+  export type DespesaCountAggregateInputType = {
+    id?: true
+    idContratoLocacao?: true
+    descricao?: true
+    valor?: true
+    tipo?: true
+    dataVencimento?: true
+    dataPagamento?: true
+    status?: true
+    comprovantePagamento?: true
+    _all?: true
+  }
+
+  export type DespesaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which despesa to aggregate.
+     */
+    where?: despesaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of despesas to fetch.
+     */
+    orderBy?: despesaOrderByWithRelationInput | despesaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: despesaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` despesas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` despesas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned despesas
+    **/
+    _count?: true | DespesaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DespesaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DespesaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DespesaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DespesaMaxAggregateInputType
+  }
+
+  export type GetDespesaAggregateType<T extends DespesaAggregateArgs> = {
+        [P in keyof T & keyof AggregateDespesa]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDespesa[P]>
+      : GetScalarType<T[P], AggregateDespesa[P]>
+  }
+
+
+
+
+  export type despesaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: despesaWhereInput
+    orderBy?: despesaOrderByWithAggregationInput | despesaOrderByWithAggregationInput[]
+    by: DespesaScalarFieldEnum[] | DespesaScalarFieldEnum
+    having?: despesaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DespesaCountAggregateInputType | true
+    _avg?: DespesaAvgAggregateInputType
+    _sum?: DespesaSumAggregateInputType
+    _min?: DespesaMinAggregateInputType
+    _max?: DespesaMaxAggregateInputType
+  }
+
+  export type DespesaGroupByOutputType = {
+    id: bigint
+    idContratoLocacao: bigint
+    descricao: string
+    valor: Decimal
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date
+    dataPagamento: Date | null
+    status: $Enums.status_despesa_enum
+    comprovantePagamento: Bytes | null
+    _count: DespesaCountAggregateOutputType | null
+    _avg: DespesaAvgAggregateOutputType | null
+    _sum: DespesaSumAggregateOutputType | null
+    _min: DespesaMinAggregateOutputType | null
+    _max: DespesaMaxAggregateOutputType | null
+  }
+
+  type GetDespesaGroupByPayload<T extends despesaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DespesaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DespesaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DespesaGroupByOutputType[P]>
+            : GetScalarType<T[P], DespesaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type despesaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    idContratoLocacao?: boolean
+    descricao?: boolean
+    valor?: boolean
+    tipo?: boolean
+    dataVencimento?: boolean
+    dataPagamento?: boolean
+    status?: boolean
+    comprovantePagamento?: boolean
+    contratolocacao?: boolean | contratolocacaoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["despesa"]>
+
+
+
+  export type despesaSelectScalar = {
+    id?: boolean
+    idContratoLocacao?: boolean
+    descricao?: boolean
+    valor?: boolean
+    tipo?: boolean
+    dataVencimento?: boolean
+    dataPagamento?: boolean
+    status?: boolean
+    comprovantePagamento?: boolean
+  }
+
+  export type despesaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idContratoLocacao" | "descricao" | "valor" | "tipo" | "dataVencimento" | "dataPagamento" | "status" | "comprovantePagamento", ExtArgs["result"]["despesa"]>
+  export type despesaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contratolocacao?: boolean | contratolocacaoDefaultArgs<ExtArgs>
+  }
+
+  export type $despesaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "despesa"
+    objects: {
+      contratolocacao: Prisma.$contratolocacaoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      idContratoLocacao: bigint
+      descricao: string
+      valor: Prisma.Decimal
+      tipo: $Enums.tipo_despesa_enum
+      dataVencimento: Date
+      dataPagamento: Date | null
+      status: $Enums.status_despesa_enum
+      comprovantePagamento: Prisma.Bytes | null
+    }, ExtArgs["result"]["despesa"]>
+    composites: {}
+  }
+
+  type despesaGetPayload<S extends boolean | null | undefined | despesaDefaultArgs> = $Result.GetResult<Prisma.$despesaPayload, S>
+
+  type despesaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<despesaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DespesaCountAggregateInputType | true
+    }
+
+  export interface despesaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['despesa'], meta: { name: 'despesa' } }
+    /**
+     * Find zero or one Despesa that matches the filter.
+     * @param {despesaFindUniqueArgs} args - Arguments to find a Despesa
+     * @example
+     * // Get one Despesa
+     * const despesa = await prisma.despesa.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends despesaFindUniqueArgs>(args: SelectSubset<T, despesaFindUniqueArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Despesa that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {despesaFindUniqueOrThrowArgs} args - Arguments to find a Despesa
+     * @example
+     * // Get one Despesa
+     * const despesa = await prisma.despesa.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends despesaFindUniqueOrThrowArgs>(args: SelectSubset<T, despesaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Despesa that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaFindFirstArgs} args - Arguments to find a Despesa
+     * @example
+     * // Get one Despesa
+     * const despesa = await prisma.despesa.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends despesaFindFirstArgs>(args?: SelectSubset<T, despesaFindFirstArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Despesa that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaFindFirstOrThrowArgs} args - Arguments to find a Despesa
+     * @example
+     * // Get one Despesa
+     * const despesa = await prisma.despesa.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends despesaFindFirstOrThrowArgs>(args?: SelectSubset<T, despesaFindFirstOrThrowArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Despesas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Despesas
+     * const despesas = await prisma.despesa.findMany()
+     * 
+     * // Get first 10 Despesas
+     * const despesas = await prisma.despesa.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const despesaWithIdOnly = await prisma.despesa.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends despesaFindManyArgs>(args?: SelectSubset<T, despesaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Despesa.
+     * @param {despesaCreateArgs} args - Arguments to create a Despesa.
+     * @example
+     * // Create one Despesa
+     * const Despesa = await prisma.despesa.create({
+     *   data: {
+     *     // ... data to create a Despesa
+     *   }
+     * })
+     * 
+     */
+    create<T extends despesaCreateArgs>(args: SelectSubset<T, despesaCreateArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Despesas.
+     * @param {despesaCreateManyArgs} args - Arguments to create many Despesas.
+     * @example
+     * // Create many Despesas
+     * const despesa = await prisma.despesa.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends despesaCreateManyArgs>(args?: SelectSubset<T, despesaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Despesa.
+     * @param {despesaDeleteArgs} args - Arguments to delete one Despesa.
+     * @example
+     * // Delete one Despesa
+     * const Despesa = await prisma.despesa.delete({
+     *   where: {
+     *     // ... filter to delete one Despesa
+     *   }
+     * })
+     * 
+     */
+    delete<T extends despesaDeleteArgs>(args: SelectSubset<T, despesaDeleteArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Despesa.
+     * @param {despesaUpdateArgs} args - Arguments to update one Despesa.
+     * @example
+     * // Update one Despesa
+     * const despesa = await prisma.despesa.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends despesaUpdateArgs>(args: SelectSubset<T, despesaUpdateArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Despesas.
+     * @param {despesaDeleteManyArgs} args - Arguments to filter Despesas to delete.
+     * @example
+     * // Delete a few Despesas
+     * const { count } = await prisma.despesa.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends despesaDeleteManyArgs>(args?: SelectSubset<T, despesaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Despesas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Despesas
+     * const despesa = await prisma.despesa.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends despesaUpdateManyArgs>(args: SelectSubset<T, despesaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Despesa.
+     * @param {despesaUpsertArgs} args - Arguments to update or create a Despesa.
+     * @example
+     * // Update or create a Despesa
+     * const despesa = await prisma.despesa.upsert({
+     *   create: {
+     *     // ... data to create a Despesa
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Despesa we want to update
+     *   }
+     * })
+     */
+    upsert<T extends despesaUpsertArgs>(args: SelectSubset<T, despesaUpsertArgs<ExtArgs>>): Prisma__despesaClient<$Result.GetResult<Prisma.$despesaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Despesas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaCountArgs} args - Arguments to filter Despesas to count.
+     * @example
+     * // Count the number of Despesas
+     * const count = await prisma.despesa.count({
+     *   where: {
+     *     // ... the filter for the Despesas we want to count
+     *   }
+     * })
+    **/
+    count<T extends despesaCountArgs>(
+      args?: Subset<T, despesaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DespesaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Despesa.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DespesaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DespesaAggregateArgs>(args: Subset<T, DespesaAggregateArgs>): Prisma.PrismaPromise<GetDespesaAggregateType<T>>
+
+    /**
+     * Group by Despesa.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {despesaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends despesaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: despesaGroupByArgs['orderBy'] }
+        : { orderBy?: despesaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, despesaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDespesaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the despesa model
+   */
+  readonly fields: despesaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for despesa.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__despesaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contratolocacao<T extends contratolocacaoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, contratolocacaoDefaultArgs<ExtArgs>>): Prisma__contratolocacaoClient<$Result.GetResult<Prisma.$contratolocacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the despesa model
+   */
+  interface despesaFieldRefs {
+    readonly id: FieldRef<"despesa", 'BigInt'>
+    readonly idContratoLocacao: FieldRef<"despesa", 'BigInt'>
+    readonly descricao: FieldRef<"despesa", 'String'>
+    readonly valor: FieldRef<"despesa", 'Decimal'>
+    readonly tipo: FieldRef<"despesa", 'tipo_despesa_enum'>
+    readonly dataVencimento: FieldRef<"despesa", 'DateTime'>
+    readonly dataPagamento: FieldRef<"despesa", 'DateTime'>
+    readonly status: FieldRef<"despesa", 'status_despesa_enum'>
+    readonly comprovantePagamento: FieldRef<"despesa", 'Bytes'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * despesa findUnique
+   */
+  export type despesaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter, which despesa to fetch.
+     */
+    where: despesaWhereUniqueInput
+  }
+
+  /**
+   * despesa findUniqueOrThrow
+   */
+  export type despesaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter, which despesa to fetch.
+     */
+    where: despesaWhereUniqueInput
+  }
+
+  /**
+   * despesa findFirst
+   */
+  export type despesaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter, which despesa to fetch.
+     */
+    where?: despesaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of despesas to fetch.
+     */
+    orderBy?: despesaOrderByWithRelationInput | despesaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for despesas.
+     */
+    cursor?: despesaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` despesas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` despesas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of despesas.
+     */
+    distinct?: DespesaScalarFieldEnum | DespesaScalarFieldEnum[]
+  }
+
+  /**
+   * despesa findFirstOrThrow
+   */
+  export type despesaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter, which despesa to fetch.
+     */
+    where?: despesaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of despesas to fetch.
+     */
+    orderBy?: despesaOrderByWithRelationInput | despesaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for despesas.
+     */
+    cursor?: despesaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` despesas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` despesas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of despesas.
+     */
+    distinct?: DespesaScalarFieldEnum | DespesaScalarFieldEnum[]
+  }
+
+  /**
+   * despesa findMany
+   */
+  export type despesaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter, which despesas to fetch.
+     */
+    where?: despesaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of despesas to fetch.
+     */
+    orderBy?: despesaOrderByWithRelationInput | despesaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing despesas.
+     */
+    cursor?: despesaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` despesas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` despesas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of despesas.
+     */
+    distinct?: DespesaScalarFieldEnum | DespesaScalarFieldEnum[]
+  }
+
+  /**
+   * despesa create
+   */
+  export type despesaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a despesa.
+     */
+    data: XOR<despesaCreateInput, despesaUncheckedCreateInput>
+  }
+
+  /**
+   * despesa createMany
+   */
+  export type despesaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many despesas.
+     */
+    data: despesaCreateManyInput | despesaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * despesa update
+   */
+  export type despesaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a despesa.
+     */
+    data: XOR<despesaUpdateInput, despesaUncheckedUpdateInput>
+    /**
+     * Choose, which despesa to update.
+     */
+    where: despesaWhereUniqueInput
+  }
+
+  /**
+   * despesa updateMany
+   */
+  export type despesaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update despesas.
+     */
+    data: XOR<despesaUpdateManyMutationInput, despesaUncheckedUpdateManyInput>
+    /**
+     * Filter which despesas to update
+     */
+    where?: despesaWhereInput
+    /**
+     * Limit how many despesas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * despesa upsert
+   */
+  export type despesaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the despesa to update in case it exists.
+     */
+    where: despesaWhereUniqueInput
+    /**
+     * In case the despesa found by the `where` argument doesn't exist, create a new despesa with this data.
+     */
+    create: XOR<despesaCreateInput, despesaUncheckedCreateInput>
+    /**
+     * In case the despesa was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<despesaUpdateInput, despesaUncheckedUpdateInput>
+  }
+
+  /**
+   * despesa delete
+   */
+  export type despesaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+    /**
+     * Filter which despesa to delete.
+     */
+    where: despesaWhereUniqueInput
+  }
+
+  /**
+   * despesa deleteMany
+   */
+  export type despesaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which despesas to delete
+     */
+    where?: despesaWhereInput
+    /**
+     * Limit how many despesas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * despesa without action
+   */
+  export type despesaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the despesa
+     */
+    select?: despesaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the despesa
+     */
+    omit?: despesaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: despesaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Enums
+   */
+
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
+
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const EnderecoScalarFieldEnum: {
+    id: 'id',
+    rua: 'rua',
+    numero: 'numero',
+    bairro: 'bairro',
+    cidade: 'cidade',
+    estado: 'estado',
+    cep: 'cep'
+  };
+
+  export type EnderecoScalarFieldEnum = (typeof EnderecoScalarFieldEnum)[keyof typeof EnderecoScalarFieldEnum]
+
+
+  export const ImovelScalarFieldEnum: {
+    id: 'id',
+    idEndereco: 'idEndereco',
+    inscricaoIPTU: 'inscricaoIPTU',
+    inscricaoBombeiro: 'inscricaoBombeiro',
+    metragem: 'metragem',
+    dataCadastro: 'dataCadastro',
+    classificacao: 'classificacao',
+    tipologia: 'tipologia',
+    status: 'status'
+  };
+
+  export type ImovelScalarFieldEnum = (typeof ImovelScalarFieldEnum)[keyof typeof ImovelScalarFieldEnum]
+
+
+  export const PropriedadeimovelScalarFieldEnum: {
+    id: 'id',
+    idImovel: 'idImovel',
+    idLocador: 'idLocador',
+    percentualParticipacao: 'percentualParticipacao'
+  };
+
+  export type PropriedadeimovelScalarFieldEnum = (typeof PropriedadeimovelScalarFieldEnum)[keyof typeof PropriedadeimovelScalarFieldEnum]
+
+
+  export const ContratolocacaoScalarFieldEnum: {
+    id: 'id',
+    idImovel: 'idImovel',
+    idLocador: 'idLocador',
+    idLocatario: 'idLocatario',
+    dataInicio: 'dataInicio',
+    dataFim: 'dataFim',
+    dataReajuste: 'dataReajuste',
+    valorAluguel: 'valorAluguel',
+    status: 'status',
+    contratoDigitalizado: 'contratoDigitalizado'
+  };
+
+  export type ContratolocacaoScalarFieldEnum = (typeof ContratolocacaoScalarFieldEnum)[keyof typeof ContratolocacaoScalarFieldEnum]
+
+
+  export const DespesaScalarFieldEnum: {
+    id: 'id',
+    idContratoLocacao: 'idContratoLocacao',
+    descricao: 'descricao',
+    valor: 'valor',
+    tipo: 'tipo',
+    dataVencimento: 'dataVencimento',
+    dataPagamento: 'dataPagamento',
+    status: 'status',
+    comprovantePagamento: 'comprovantePagamento'
+  };
+
+  export type DespesaScalarFieldEnum = (typeof DespesaScalarFieldEnum)[keyof typeof DespesaScalarFieldEnum]
+
+
+  export const SortOrder: {
+    asc: 'asc',
+    desc: 'desc'
+  };
+
+  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const enderecoOrderByRelevanceFieldEnum: {
+    rua: 'rua',
+    numero: 'numero',
+    bairro: 'bairro',
+    cidade: 'cidade',
+    estado: 'estado',
+    cep: 'cep'
+  };
+
+  export type enderecoOrderByRelevanceFieldEnum = (typeof enderecoOrderByRelevanceFieldEnum)[keyof typeof enderecoOrderByRelevanceFieldEnum]
+
+
+  export const imovelOrderByRelevanceFieldEnum: {
+    inscricaoIPTU: 'inscricaoIPTU',
+    inscricaoBombeiro: 'inscricaoBombeiro',
+    metragem: 'metragem'
+  };
+
+  export type imovelOrderByRelevanceFieldEnum = (typeof imovelOrderByRelevanceFieldEnum)[keyof typeof imovelOrderByRelevanceFieldEnum]
+
+
+  export const despesaOrderByRelevanceFieldEnum: {
+    descricao: 'descricao'
+  };
+
+  export type despesaOrderByRelevanceFieldEnum = (typeof despesaOrderByRelevanceFieldEnum)[keyof typeof despesaOrderByRelevanceFieldEnum]
+
+
+  /**
+   * Field references
+   */
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'classificacao_enum'
+   */
+  export type Enumclassificacao_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'classificacao_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'tipologia_enum'
+   */
+  export type Enumtipologia_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'tipologia_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'status_imovel_enum'
+   */
+  export type Enumstatus_imovel_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'status_imovel_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'status_contrato_enum'
+   */
+  export type Enumstatus_contrato_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'status_contrato_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'Bytes'
+   */
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
+   * Reference to a field of type 'tipo_despesa_enum'
+   */
+  export type Enumtipo_despesa_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'tipo_despesa_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'status_despesa_enum'
+   */
+  export type Enumstatus_despesa_enumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'status_despesa_enum'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+  /**
+   * Deep Input Types
+   */
+
+
+  export type enderecoWhereInput = {
+    AND?: enderecoWhereInput | enderecoWhereInput[]
+    OR?: enderecoWhereInput[]
+    NOT?: enderecoWhereInput | enderecoWhereInput[]
+    id?: IntFilter<"endereco"> | number
+    rua?: StringFilter<"endereco"> | string
+    numero?: StringNullableFilter<"endereco"> | string | null
+    bairro?: StringFilter<"endereco"> | string
+    cidade?: StringFilter<"endereco"> | string
+    estado?: StringFilter<"endereco"> | string
+    cep?: StringFilter<"endereco"> | string
+    imovel?: ImovelListRelationFilter
+  }
+
+  export type enderecoOrderByWithRelationInput = {
+    id?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrderInput | SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cep?: SortOrder
+    imovel?: imovelOrderByRelationAggregateInput
+    _relevance?: enderecoOrderByRelevanceInput
+  }
+
+  export type enderecoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: enderecoWhereInput | enderecoWhereInput[]
+    OR?: enderecoWhereInput[]
+    NOT?: enderecoWhereInput | enderecoWhereInput[]
+    rua?: StringFilter<"endereco"> | string
+    numero?: StringNullableFilter<"endereco"> | string | null
+    bairro?: StringFilter<"endereco"> | string
+    cidade?: StringFilter<"endereco"> | string
+    estado?: StringFilter<"endereco"> | string
+    cep?: StringFilter<"endereco"> | string
+    imovel?: ImovelListRelationFilter
+  }, "id">
+
+  export type enderecoOrderByWithAggregationInput = {
+    id?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrderInput | SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cep?: SortOrder
+    _count?: enderecoCountOrderByAggregateInput
+    _avg?: enderecoAvgOrderByAggregateInput
+    _max?: enderecoMaxOrderByAggregateInput
+    _min?: enderecoMinOrderByAggregateInput
+    _sum?: enderecoSumOrderByAggregateInput
+  }
+
+  export type enderecoScalarWhereWithAggregatesInput = {
+    AND?: enderecoScalarWhereWithAggregatesInput | enderecoScalarWhereWithAggregatesInput[]
+    OR?: enderecoScalarWhereWithAggregatesInput[]
+    NOT?: enderecoScalarWhereWithAggregatesInput | enderecoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"endereco"> | number
+    rua?: StringWithAggregatesFilter<"endereco"> | string
+    numero?: StringNullableWithAggregatesFilter<"endereco"> | string | null
+    bairro?: StringWithAggregatesFilter<"endereco"> | string
+    cidade?: StringWithAggregatesFilter<"endereco"> | string
+    estado?: StringWithAggregatesFilter<"endereco"> | string
+    cep?: StringWithAggregatesFilter<"endereco"> | string
+  }
+
+  export type imovelWhereInput = {
+    AND?: imovelWhereInput | imovelWhereInput[]
+    OR?: imovelWhereInput[]
+    NOT?: imovelWhereInput | imovelWhereInput[]
+    id?: IntFilter<"imovel"> | number
+    idEndereco?: IntFilter<"imovel"> | number
+    inscricaoIPTU?: StringNullableFilter<"imovel"> | string | null
+    inscricaoBombeiro?: StringNullableFilter<"imovel"> | string | null
+    metragem?: StringNullableFilter<"imovel"> | string | null
+    dataCadastro?: DateTimeFilter<"imovel"> | Date | string
+    classificacao?: Enumclassificacao_enumFilter<"imovel"> | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFilter<"imovel"> | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFilter<"imovel"> | $Enums.status_imovel_enum
+    endereco?: XOR<EnderecoScalarRelationFilter, enderecoWhereInput>
+    contratolocacao?: ContratolocacaoListRelationFilter
+    propriedadeimovel?: PropriedadeimovelListRelationFilter
+  }
+
+  export type imovelOrderByWithRelationInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+    inscricaoIPTU?: SortOrderInput | SortOrder
+    inscricaoBombeiro?: SortOrderInput | SortOrder
+    metragem?: SortOrderInput | SortOrder
+    dataCadastro?: SortOrder
+    classificacao?: SortOrder
+    tipologia?: SortOrder
+    status?: SortOrder
+    endereco?: enderecoOrderByWithRelationInput
+    contratolocacao?: contratolocacaoOrderByRelationAggregateInput
+    propriedadeimovel?: propriedadeimovelOrderByRelationAggregateInput
+    _relevance?: imovelOrderByRelevanceInput
+  }
+
+  export type imovelWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    inscricaoIPTU?: string
+    AND?: imovelWhereInput | imovelWhereInput[]
+    OR?: imovelWhereInput[]
+    NOT?: imovelWhereInput | imovelWhereInput[]
+    idEndereco?: IntFilter<"imovel"> | number
+    inscricaoBombeiro?: StringNullableFilter<"imovel"> | string | null
+    metragem?: StringNullableFilter<"imovel"> | string | null
+    dataCadastro?: DateTimeFilter<"imovel"> | Date | string
+    classificacao?: Enumclassificacao_enumFilter<"imovel"> | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFilter<"imovel"> | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFilter<"imovel"> | $Enums.status_imovel_enum
+    endereco?: XOR<EnderecoScalarRelationFilter, enderecoWhereInput>
+    contratolocacao?: ContratolocacaoListRelationFilter
+    propriedadeimovel?: PropriedadeimovelListRelationFilter
+  }, "id" | "inscricaoIPTU">
+
+  export type imovelOrderByWithAggregationInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+    inscricaoIPTU?: SortOrderInput | SortOrder
+    inscricaoBombeiro?: SortOrderInput | SortOrder
+    metragem?: SortOrderInput | SortOrder
+    dataCadastro?: SortOrder
+    classificacao?: SortOrder
+    tipologia?: SortOrder
+    status?: SortOrder
+    _count?: imovelCountOrderByAggregateInput
+    _avg?: imovelAvgOrderByAggregateInput
+    _max?: imovelMaxOrderByAggregateInput
+    _min?: imovelMinOrderByAggregateInput
+    _sum?: imovelSumOrderByAggregateInput
+  }
+
+  export type imovelScalarWhereWithAggregatesInput = {
+    AND?: imovelScalarWhereWithAggregatesInput | imovelScalarWhereWithAggregatesInput[]
+    OR?: imovelScalarWhereWithAggregatesInput[]
+    NOT?: imovelScalarWhereWithAggregatesInput | imovelScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"imovel"> | number
+    idEndereco?: IntWithAggregatesFilter<"imovel"> | number
+    inscricaoIPTU?: StringNullableWithAggregatesFilter<"imovel"> | string | null
+    inscricaoBombeiro?: StringNullableWithAggregatesFilter<"imovel"> | string | null
+    metragem?: StringNullableWithAggregatesFilter<"imovel"> | string | null
+    dataCadastro?: DateTimeWithAggregatesFilter<"imovel"> | Date | string
+    classificacao?: Enumclassificacao_enumWithAggregatesFilter<"imovel"> | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumWithAggregatesFilter<"imovel"> | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumWithAggregatesFilter<"imovel"> | $Enums.status_imovel_enum
+  }
+
+  export type propriedadeimovelWhereInput = {
+    AND?: propriedadeimovelWhereInput | propriedadeimovelWhereInput[]
+    OR?: propriedadeimovelWhereInput[]
+    NOT?: propriedadeimovelWhereInput | propriedadeimovelWhereInput[]
+    id?: IntFilter<"propriedadeimovel"> | number
+    idImovel?: IntFilter<"propriedadeimovel"> | number
+    idLocador?: BigIntFilter<"propriedadeimovel"> | bigint | number
+    percentualParticipacao?: DecimalFilter<"propriedadeimovel"> | Decimal | DecimalJsLike | number | string
+    imovel?: XOR<ImovelScalarRelationFilter, imovelWhereInput>
+  }
+
+  export type propriedadeimovelOrderByWithRelationInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+    imovel?: imovelOrderByWithRelationInput
+  }
+
+  export type propriedadeimovelWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: propriedadeimovelWhereInput | propriedadeimovelWhereInput[]
+    OR?: propriedadeimovelWhereInput[]
+    NOT?: propriedadeimovelWhereInput | propriedadeimovelWhereInput[]
+    idImovel?: IntFilter<"propriedadeimovel"> | number
+    idLocador?: BigIntFilter<"propriedadeimovel"> | bigint | number
+    percentualParticipacao?: DecimalFilter<"propriedadeimovel"> | Decimal | DecimalJsLike | number | string
+    imovel?: XOR<ImovelScalarRelationFilter, imovelWhereInput>
+  }, "id">
+
+  export type propriedadeimovelOrderByWithAggregationInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+    _count?: propriedadeimovelCountOrderByAggregateInput
+    _avg?: propriedadeimovelAvgOrderByAggregateInput
+    _max?: propriedadeimovelMaxOrderByAggregateInput
+    _min?: propriedadeimovelMinOrderByAggregateInput
+    _sum?: propriedadeimovelSumOrderByAggregateInput
+  }
+
+  export type propriedadeimovelScalarWhereWithAggregatesInput = {
+    AND?: propriedadeimovelScalarWhereWithAggregatesInput | propriedadeimovelScalarWhereWithAggregatesInput[]
+    OR?: propriedadeimovelScalarWhereWithAggregatesInput[]
+    NOT?: propriedadeimovelScalarWhereWithAggregatesInput | propriedadeimovelScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"propriedadeimovel"> | number
+    idImovel?: IntWithAggregatesFilter<"propriedadeimovel"> | number
+    idLocador?: BigIntWithAggregatesFilter<"propriedadeimovel"> | bigint | number
+    percentualParticipacao?: DecimalWithAggregatesFilter<"propriedadeimovel"> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type contratolocacaoWhereInput = {
+    AND?: contratolocacaoWhereInput | contratolocacaoWhereInput[]
+    OR?: contratolocacaoWhereInput[]
+    NOT?: contratolocacaoWhereInput | contratolocacaoWhereInput[]
+    id?: BigIntFilter<"contratolocacao"> | bigint | number
+    idImovel?: IntFilter<"contratolocacao"> | number
+    idLocador?: BigIntFilter<"contratolocacao"> | bigint | number
+    idLocatario?: BigIntFilter<"contratolocacao"> | bigint | number
+    dataInicio?: DateTimeFilter<"contratolocacao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    dataReajuste?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    valorAluguel?: DecimalFilter<"contratolocacao"> | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFilter<"contratolocacao"> | $Enums.status_contrato_enum
+    contratoDigitalizado?: BytesNullableFilter<"contratolocacao"> | Bytes | null
+    imovel?: XOR<ImovelScalarRelationFilter, imovelWhereInput>
+    despesa?: DespesaListRelationFilter
+  }
+
+  export type contratolocacaoOrderByWithRelationInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrderInput | SortOrder
+    dataReajuste?: SortOrderInput | SortOrder
+    valorAluguel?: SortOrder
+    status?: SortOrder
+    contratoDigitalizado?: SortOrderInput | SortOrder
+    imovel?: imovelOrderByWithRelationInput
+    despesa?: despesaOrderByRelationAggregateInput
+  }
+
+  export type contratolocacaoWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: contratolocacaoWhereInput | contratolocacaoWhereInput[]
+    OR?: contratolocacaoWhereInput[]
+    NOT?: contratolocacaoWhereInput | contratolocacaoWhereInput[]
+    idImovel?: IntFilter<"contratolocacao"> | number
+    idLocador?: BigIntFilter<"contratolocacao"> | bigint | number
+    idLocatario?: BigIntFilter<"contratolocacao"> | bigint | number
+    dataInicio?: DateTimeFilter<"contratolocacao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    dataReajuste?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    valorAluguel?: DecimalFilter<"contratolocacao"> | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFilter<"contratolocacao"> | $Enums.status_contrato_enum
+    contratoDigitalizado?: BytesNullableFilter<"contratolocacao"> | Bytes | null
+    imovel?: XOR<ImovelScalarRelationFilter, imovelWhereInput>
+    despesa?: DespesaListRelationFilter
+  }, "id">
+
+  export type contratolocacaoOrderByWithAggregationInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrderInput | SortOrder
+    dataReajuste?: SortOrderInput | SortOrder
+    valorAluguel?: SortOrder
+    status?: SortOrder
+    contratoDigitalizado?: SortOrderInput | SortOrder
+    _count?: contratolocacaoCountOrderByAggregateInput
+    _avg?: contratolocacaoAvgOrderByAggregateInput
+    _max?: contratolocacaoMaxOrderByAggregateInput
+    _min?: contratolocacaoMinOrderByAggregateInput
+    _sum?: contratolocacaoSumOrderByAggregateInput
+  }
+
+  export type contratolocacaoScalarWhereWithAggregatesInput = {
+    AND?: contratolocacaoScalarWhereWithAggregatesInput | contratolocacaoScalarWhereWithAggregatesInput[]
+    OR?: contratolocacaoScalarWhereWithAggregatesInput[]
+    NOT?: contratolocacaoScalarWhereWithAggregatesInput | contratolocacaoScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"contratolocacao"> | bigint | number
+    idImovel?: IntWithAggregatesFilter<"contratolocacao"> | number
+    idLocador?: BigIntWithAggregatesFilter<"contratolocacao"> | bigint | number
+    idLocatario?: BigIntWithAggregatesFilter<"contratolocacao"> | bigint | number
+    dataInicio?: DateTimeWithAggregatesFilter<"contratolocacao"> | Date | string
+    dataFim?: DateTimeNullableWithAggregatesFilter<"contratolocacao"> | Date | string | null
+    dataReajuste?: DateTimeNullableWithAggregatesFilter<"contratolocacao"> | Date | string | null
+    valorAluguel?: DecimalWithAggregatesFilter<"contratolocacao"> | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumWithAggregatesFilter<"contratolocacao"> | $Enums.status_contrato_enum
+    contratoDigitalizado?: BytesNullableWithAggregatesFilter<"contratolocacao"> | Bytes | null
+  }
+
+  export type despesaWhereInput = {
+    AND?: despesaWhereInput | despesaWhereInput[]
+    OR?: despesaWhereInput[]
+    NOT?: despesaWhereInput | despesaWhereInput[]
+    id?: BigIntFilter<"despesa"> | bigint | number
+    idContratoLocacao?: BigIntFilter<"despesa"> | bigint | number
+    descricao?: StringFilter<"despesa"> | string
+    valor?: DecimalFilter<"despesa"> | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFilter<"despesa"> | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFilter<"despesa"> | Date | string
+    dataPagamento?: DateTimeNullableFilter<"despesa"> | Date | string | null
+    status?: Enumstatus_despesa_enumFilter<"despesa"> | $Enums.status_despesa_enum
+    comprovantePagamento?: BytesNullableFilter<"despesa"> | Bytes | null
+    contratolocacao?: XOR<ContratolocacaoScalarRelationFilter, contratolocacaoWhereInput>
+  }
+
+  export type despesaOrderByWithRelationInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    descricao?: SortOrder
+    valor?: SortOrder
+    tipo?: SortOrder
+    dataVencimento?: SortOrder
+    dataPagamento?: SortOrderInput | SortOrder
+    status?: SortOrder
+    comprovantePagamento?: SortOrderInput | SortOrder
+    contratolocacao?: contratolocacaoOrderByWithRelationInput
+    _relevance?: despesaOrderByRelevanceInput
+  }
+
+  export type despesaWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    AND?: despesaWhereInput | despesaWhereInput[]
+    OR?: despesaWhereInput[]
+    NOT?: despesaWhereInput | despesaWhereInput[]
+    idContratoLocacao?: BigIntFilter<"despesa"> | bigint | number
+    descricao?: StringFilter<"despesa"> | string
+    valor?: DecimalFilter<"despesa"> | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFilter<"despesa"> | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFilter<"despesa"> | Date | string
+    dataPagamento?: DateTimeNullableFilter<"despesa"> | Date | string | null
+    status?: Enumstatus_despesa_enumFilter<"despesa"> | $Enums.status_despesa_enum
+    comprovantePagamento?: BytesNullableFilter<"despesa"> | Bytes | null
+    contratolocacao?: XOR<ContratolocacaoScalarRelationFilter, contratolocacaoWhereInput>
+  }, "id">
+
+  export type despesaOrderByWithAggregationInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    descricao?: SortOrder
+    valor?: SortOrder
+    tipo?: SortOrder
+    dataVencimento?: SortOrder
+    dataPagamento?: SortOrderInput | SortOrder
+    status?: SortOrder
+    comprovantePagamento?: SortOrderInput | SortOrder
+    _count?: despesaCountOrderByAggregateInput
+    _avg?: despesaAvgOrderByAggregateInput
+    _max?: despesaMaxOrderByAggregateInput
+    _min?: despesaMinOrderByAggregateInput
+    _sum?: despesaSumOrderByAggregateInput
+  }
+
+  export type despesaScalarWhereWithAggregatesInput = {
+    AND?: despesaScalarWhereWithAggregatesInput | despesaScalarWhereWithAggregatesInput[]
+    OR?: despesaScalarWhereWithAggregatesInput[]
+    NOT?: despesaScalarWhereWithAggregatesInput | despesaScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"despesa"> | bigint | number
+    idContratoLocacao?: BigIntWithAggregatesFilter<"despesa"> | bigint | number
+    descricao?: StringWithAggregatesFilter<"despesa"> | string
+    valor?: DecimalWithAggregatesFilter<"despesa"> | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumWithAggregatesFilter<"despesa"> | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeWithAggregatesFilter<"despesa"> | Date | string
+    dataPagamento?: DateTimeNullableWithAggregatesFilter<"despesa"> | Date | string | null
+    status?: Enumstatus_despesa_enumWithAggregatesFilter<"despesa"> | $Enums.status_despesa_enum
+    comprovantePagamento?: BytesNullableWithAggregatesFilter<"despesa"> | Bytes | null
+  }
+
+  export type enderecoCreateInput = {
+    rua: string
+    numero?: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+    imovel?: imovelCreateNestedManyWithoutEnderecoInput
+  }
+
+  export type enderecoUncheckedCreateInput = {
+    id?: number
+    rua: string
+    numero?: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+    imovel?: imovelUncheckedCreateNestedManyWithoutEnderecoInput
+  }
+
+  export type enderecoUpdateInput = {
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    imovel?: imovelUpdateManyWithoutEnderecoNestedInput
+  }
+
+  export type enderecoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    imovel?: imovelUncheckedUpdateManyWithoutEnderecoNestedInput
+  }
+
+  export type enderecoCreateManyInput = {
+    id?: number
+    rua: string
+    numero?: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+  }
+
+  export type enderecoUpdateManyMutationInput = {
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type enderecoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type imovelCreateInput = {
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    endereco: enderecoCreateNestedOneWithoutImovelInput
+    contratolocacao?: contratolocacaoCreateNestedManyWithoutImovelInput
+    propriedadeimovel?: propriedadeimovelCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelUncheckedCreateInput = {
+    id?: number
+    idEndereco: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedCreateNestedManyWithoutImovelInput
+    propriedadeimovel?: propriedadeimovelUncheckedCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelUpdateInput = {
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    endereco?: enderecoUpdateOneRequiredWithoutImovelNestedInput
+    contratolocacao?: contratolocacaoUpdateManyWithoutImovelNestedInput
+    propriedadeimovel?: propriedadeimovelUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idEndereco?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedUpdateManyWithoutImovelNestedInput
+    propriedadeimovel?: propriedadeimovelUncheckedUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelCreateManyInput = {
+    id?: number
+    idEndereco: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+  }
+
+  export type imovelUpdateManyMutationInput = {
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+  }
+
+  export type imovelUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idEndereco?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+  }
+
+  export type propriedadeimovelCreateInput = {
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+    imovel: imovelCreateNestedOneWithoutPropriedadeimovelInput
+  }
+
+  export type propriedadeimovelUncheckedCreateInput = {
+    id?: number
+    idImovel: number
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUpdateInput = {
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imovel?: imovelUpdateOneRequiredWithoutPropriedadeimovelNestedInput
+  }
+
+  export type propriedadeimovelUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idImovel?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelCreateManyInput = {
+    id?: number
+    idImovel: number
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUpdateManyMutationInput = {
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idImovel?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type contratolocacaoCreateInput = {
+    id?: bigint | number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+    imovel: imovelCreateNestedOneWithoutContratolocacaoInput
+    despesa?: despesaCreateNestedManyWithoutContratolocacaoInput
+  }
+
+  export type contratolocacaoUncheckedCreateInput = {
+    id?: bigint | number
+    idImovel: number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+    despesa?: despesaUncheckedCreateNestedManyWithoutContratolocacaoInput
+  }
+
+  export type contratolocacaoUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    imovel?: imovelUpdateOneRequiredWithoutContratolocacaoNestedInput
+    despesa?: despesaUpdateManyWithoutContratolocacaoNestedInput
+  }
+
+  export type contratolocacaoUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idImovel?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    despesa?: despesaUncheckedUpdateManyWithoutContratolocacaoNestedInput
+  }
+
+  export type contratolocacaoCreateManyInput = {
+    id?: bigint | number
+    idImovel: number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+  }
+
+  export type contratolocacaoUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type contratolocacaoUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idImovel?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type despesaCreateInput = {
+    id?: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+    contratolocacao: contratolocacaoCreateNestedOneWithoutDespesaInput
+  }
+
+  export type despesaUncheckedCreateInput = {
+    id?: bigint | number
+    idContratoLocacao: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+  }
+
+  export type despesaUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    contratolocacao?: contratolocacaoUpdateOneRequiredWithoutDespesaNestedInput
+  }
+
+  export type despesaUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idContratoLocacao?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type despesaCreateManyInput = {
+    id?: bigint | number
+    idContratoLocacao: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+  }
+
+  export type despesaUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type despesaUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idContratoLocacao?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type ImovelListRelationFilter = {
+    every?: imovelWhereInput
+    some?: imovelWhereInput
+    none?: imovelWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type imovelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type enderecoOrderByRelevanceInput = {
+    fields: enderecoOrderByRelevanceFieldEnum | enderecoOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type enderecoCountOrderByAggregateInput = {
+    id?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cep?: SortOrder
+  }
+
+  export type enderecoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type enderecoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cep?: SortOrder
+  }
+
+  export type enderecoMinOrderByAggregateInput = {
+    id?: SortOrder
+    rua?: SortOrder
+    numero?: SortOrder
+    bairro?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cep?: SortOrder
+  }
+
+  export type enderecoSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type Enumclassificacao_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.classificacao_enum | Enumclassificacao_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.classificacao_enum[]
+    notIn?: $Enums.classificacao_enum[]
+    not?: NestedEnumclassificacao_enumFilter<$PrismaModel> | $Enums.classificacao_enum
+  }
+
+  export type Enumtipologia_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipologia_enum | Enumtipologia_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipologia_enum[]
+    notIn?: $Enums.tipologia_enum[]
+    not?: NestedEnumtipologia_enumFilter<$PrismaModel> | $Enums.tipologia_enum
+  }
+
+  export type Enumstatus_imovel_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_imovel_enum | Enumstatus_imovel_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_imovel_enum[]
+    notIn?: $Enums.status_imovel_enum[]
+    not?: NestedEnumstatus_imovel_enumFilter<$PrismaModel> | $Enums.status_imovel_enum
+  }
+
+  export type EnderecoScalarRelationFilter = {
+    is?: enderecoWhereInput
+    isNot?: enderecoWhereInput
+  }
+
+  export type ContratolocacaoListRelationFilter = {
+    every?: contratolocacaoWhereInput
+    some?: contratolocacaoWhereInput
+    none?: contratolocacaoWhereInput
+  }
+
+  export type PropriedadeimovelListRelationFilter = {
+    every?: propriedadeimovelWhereInput
+    some?: propriedadeimovelWhereInput
+    none?: propriedadeimovelWhereInput
+  }
+
+  export type contratolocacaoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type propriedadeimovelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type imovelOrderByRelevanceInput = {
+    fields: imovelOrderByRelevanceFieldEnum | imovelOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type imovelCountOrderByAggregateInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+    inscricaoIPTU?: SortOrder
+    inscricaoBombeiro?: SortOrder
+    metragem?: SortOrder
+    dataCadastro?: SortOrder
+    classificacao?: SortOrder
+    tipologia?: SortOrder
+    status?: SortOrder
+  }
+
+  export type imovelAvgOrderByAggregateInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+  }
+
+  export type imovelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+    inscricaoIPTU?: SortOrder
+    inscricaoBombeiro?: SortOrder
+    metragem?: SortOrder
+    dataCadastro?: SortOrder
+    classificacao?: SortOrder
+    tipologia?: SortOrder
+    status?: SortOrder
+  }
+
+  export type imovelMinOrderByAggregateInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+    inscricaoIPTU?: SortOrder
+    inscricaoBombeiro?: SortOrder
+    metragem?: SortOrder
+    dataCadastro?: SortOrder
+    classificacao?: SortOrder
+    tipologia?: SortOrder
+    status?: SortOrder
+  }
+
+  export type imovelSumOrderByAggregateInput = {
+    id?: SortOrder
+    idEndereco?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type Enumclassificacao_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.classificacao_enum | Enumclassificacao_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.classificacao_enum[]
+    notIn?: $Enums.classificacao_enum[]
+    not?: NestedEnumclassificacao_enumWithAggregatesFilter<$PrismaModel> | $Enums.classificacao_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumclassificacao_enumFilter<$PrismaModel>
+    _max?: NestedEnumclassificacao_enumFilter<$PrismaModel>
+  }
+
+  export type Enumtipologia_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipologia_enum | Enumtipologia_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipologia_enum[]
+    notIn?: $Enums.tipologia_enum[]
+    not?: NestedEnumtipologia_enumWithAggregatesFilter<$PrismaModel> | $Enums.tipologia_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumtipologia_enumFilter<$PrismaModel>
+    _max?: NestedEnumtipologia_enumFilter<$PrismaModel>
+  }
+
+  export type Enumstatus_imovel_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_imovel_enum | Enumstatus_imovel_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_imovel_enum[]
+    notIn?: $Enums.status_imovel_enum[]
+    not?: NestedEnumstatus_imovel_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_imovel_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_imovel_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_imovel_enumFilter<$PrismaModel>
+  }
+
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type ImovelScalarRelationFilter = {
+    is?: imovelWhereInput
+    isNot?: imovelWhereInput
+  }
+
+  export type propriedadeimovelCountOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+  }
+
+  export type propriedadeimovelAvgOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+  }
+
+  export type propriedadeimovelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+  }
+
+  export type propriedadeimovelMinOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+  }
+
+  export type propriedadeimovelSumOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    percentualParticipacao?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type Enumstatus_contrato_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_contrato_enum | Enumstatus_contrato_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_contrato_enum[]
+    notIn?: $Enums.status_contrato_enum[]
+    not?: NestedEnumstatus_contrato_enumFilter<$PrismaModel> | $Enums.status_contrato_enum
+  }
+
+  export type BytesNullableFilter<$PrismaModel = never> = {
+    equals?: Bytes | BytesFieldRefInput<$PrismaModel> | null
+    in?: Bytes[] | null
+    notIn?: Bytes[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Bytes | null
+  }
+
+  export type DespesaListRelationFilter = {
+    every?: despesaWhereInput
+    some?: despesaWhereInput
+    none?: despesaWhereInput
+  }
+
+  export type despesaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type contratolocacaoCountOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataReajuste?: SortOrder
+    valorAluguel?: SortOrder
+    status?: SortOrder
+    contratoDigitalizado?: SortOrder
+  }
+
+  export type contratolocacaoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    valorAluguel?: SortOrder
+  }
+
+  export type contratolocacaoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataReajuste?: SortOrder
+    valorAluguel?: SortOrder
+    status?: SortOrder
+    contratoDigitalizado?: SortOrder
+  }
+
+  export type contratolocacaoMinOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    dataInicio?: SortOrder
+    dataFim?: SortOrder
+    dataReajuste?: SortOrder
+    valorAluguel?: SortOrder
+    status?: SortOrder
+    contratoDigitalizado?: SortOrder
+  }
+
+  export type contratolocacaoSumOrderByAggregateInput = {
+    id?: SortOrder
+    idImovel?: SortOrder
+    idLocador?: SortOrder
+    idLocatario?: SortOrder
+    valorAluguel?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type Enumstatus_contrato_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_contrato_enum | Enumstatus_contrato_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_contrato_enum[]
+    notIn?: $Enums.status_contrato_enum[]
+    not?: NestedEnumstatus_contrato_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_contrato_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_contrato_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_contrato_enumFilter<$PrismaModel>
+  }
+
+  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Bytes | BytesFieldRefInput<$PrismaModel> | null
+    in?: Bytes[] | null
+    notIn?: Bytes[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Bytes | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type Enumtipo_despesa_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipo_despesa_enum | Enumtipo_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipo_despesa_enum[]
+    notIn?: $Enums.tipo_despesa_enum[]
+    not?: NestedEnumtipo_despesa_enumFilter<$PrismaModel> | $Enums.tipo_despesa_enum
+  }
+
+  export type Enumstatus_despesa_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_despesa_enum | Enumstatus_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_despesa_enum[]
+    notIn?: $Enums.status_despesa_enum[]
+    not?: NestedEnumstatus_despesa_enumFilter<$PrismaModel> | $Enums.status_despesa_enum
+  }
+
+  export type ContratolocacaoScalarRelationFilter = {
+    is?: contratolocacaoWhereInput
+    isNot?: contratolocacaoWhereInput
+  }
+
+  export type despesaOrderByRelevanceInput = {
+    fields: despesaOrderByRelevanceFieldEnum | despesaOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type despesaCountOrderByAggregateInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    descricao?: SortOrder
+    valor?: SortOrder
+    tipo?: SortOrder
+    dataVencimento?: SortOrder
+    dataPagamento?: SortOrder
+    status?: SortOrder
+    comprovantePagamento?: SortOrder
+  }
+
+  export type despesaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    valor?: SortOrder
+  }
+
+  export type despesaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    descricao?: SortOrder
+    valor?: SortOrder
+    tipo?: SortOrder
+    dataVencimento?: SortOrder
+    dataPagamento?: SortOrder
+    status?: SortOrder
+    comprovantePagamento?: SortOrder
+  }
+
+  export type despesaMinOrderByAggregateInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    descricao?: SortOrder
+    valor?: SortOrder
+    tipo?: SortOrder
+    dataVencimento?: SortOrder
+    dataPagamento?: SortOrder
+    status?: SortOrder
+    comprovantePagamento?: SortOrder
+  }
+
+  export type despesaSumOrderByAggregateInput = {
+    id?: SortOrder
+    idContratoLocacao?: SortOrder
+    valor?: SortOrder
+  }
+
+  export type Enumtipo_despesa_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipo_despesa_enum | Enumtipo_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipo_despesa_enum[]
+    notIn?: $Enums.tipo_despesa_enum[]
+    not?: NestedEnumtipo_despesa_enumWithAggregatesFilter<$PrismaModel> | $Enums.tipo_despesa_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumtipo_despesa_enumFilter<$PrismaModel>
+    _max?: NestedEnumtipo_despesa_enumFilter<$PrismaModel>
+  }
+
+  export type Enumstatus_despesa_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_despesa_enum | Enumstatus_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_despesa_enum[]
+    notIn?: $Enums.status_despesa_enum[]
+    not?: NestedEnumstatus_despesa_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_despesa_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_despesa_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_despesa_enumFilter<$PrismaModel>
+  }
+
+  export type imovelCreateNestedManyWithoutEnderecoInput = {
+    create?: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput> | imovelCreateWithoutEnderecoInput[] | imovelUncheckedCreateWithoutEnderecoInput[]
+    connectOrCreate?: imovelCreateOrConnectWithoutEnderecoInput | imovelCreateOrConnectWithoutEnderecoInput[]
+    createMany?: imovelCreateManyEnderecoInputEnvelope
+    connect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+  }
+
+  export type imovelUncheckedCreateNestedManyWithoutEnderecoInput = {
+    create?: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput> | imovelCreateWithoutEnderecoInput[] | imovelUncheckedCreateWithoutEnderecoInput[]
+    connectOrCreate?: imovelCreateOrConnectWithoutEnderecoInput | imovelCreateOrConnectWithoutEnderecoInput[]
+    createMany?: imovelCreateManyEnderecoInputEnvelope
+    connect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type imovelUpdateManyWithoutEnderecoNestedInput = {
+    create?: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput> | imovelCreateWithoutEnderecoInput[] | imovelUncheckedCreateWithoutEnderecoInput[]
+    connectOrCreate?: imovelCreateOrConnectWithoutEnderecoInput | imovelCreateOrConnectWithoutEnderecoInput[]
+    upsert?: imovelUpsertWithWhereUniqueWithoutEnderecoInput | imovelUpsertWithWhereUniqueWithoutEnderecoInput[]
+    createMany?: imovelCreateManyEnderecoInputEnvelope
+    set?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    disconnect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    delete?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    connect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    update?: imovelUpdateWithWhereUniqueWithoutEnderecoInput | imovelUpdateWithWhereUniqueWithoutEnderecoInput[]
+    updateMany?: imovelUpdateManyWithWhereWithoutEnderecoInput | imovelUpdateManyWithWhereWithoutEnderecoInput[]
+    deleteMany?: imovelScalarWhereInput | imovelScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type imovelUncheckedUpdateManyWithoutEnderecoNestedInput = {
+    create?: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput> | imovelCreateWithoutEnderecoInput[] | imovelUncheckedCreateWithoutEnderecoInput[]
+    connectOrCreate?: imovelCreateOrConnectWithoutEnderecoInput | imovelCreateOrConnectWithoutEnderecoInput[]
+    upsert?: imovelUpsertWithWhereUniqueWithoutEnderecoInput | imovelUpsertWithWhereUniqueWithoutEnderecoInput[]
+    createMany?: imovelCreateManyEnderecoInputEnvelope
+    set?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    disconnect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    delete?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    connect?: imovelWhereUniqueInput | imovelWhereUniqueInput[]
+    update?: imovelUpdateWithWhereUniqueWithoutEnderecoInput | imovelUpdateWithWhereUniqueWithoutEnderecoInput[]
+    updateMany?: imovelUpdateManyWithWhereWithoutEnderecoInput | imovelUpdateManyWithWhereWithoutEnderecoInput[]
+    deleteMany?: imovelScalarWhereInput | imovelScalarWhereInput[]
+  }
+
+  export type enderecoCreateNestedOneWithoutImovelInput = {
+    create?: XOR<enderecoCreateWithoutImovelInput, enderecoUncheckedCreateWithoutImovelInput>
+    connectOrCreate?: enderecoCreateOrConnectWithoutImovelInput
+    connect?: enderecoWhereUniqueInput
+  }
+
+  export type contratolocacaoCreateNestedManyWithoutImovelInput = {
+    create?: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput> | contratolocacaoCreateWithoutImovelInput[] | contratolocacaoUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutImovelInput | contratolocacaoCreateOrConnectWithoutImovelInput[]
+    createMany?: contratolocacaoCreateManyImovelInputEnvelope
+    connect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+  }
+
+  export type propriedadeimovelCreateNestedManyWithoutImovelInput = {
+    create?: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput> | propriedadeimovelCreateWithoutImovelInput[] | propriedadeimovelUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: propriedadeimovelCreateOrConnectWithoutImovelInput | propriedadeimovelCreateOrConnectWithoutImovelInput[]
+    createMany?: propriedadeimovelCreateManyImovelInputEnvelope
+    connect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+  }
+
+  export type contratolocacaoUncheckedCreateNestedManyWithoutImovelInput = {
+    create?: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput> | contratolocacaoCreateWithoutImovelInput[] | contratolocacaoUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutImovelInput | contratolocacaoCreateOrConnectWithoutImovelInput[]
+    createMany?: contratolocacaoCreateManyImovelInputEnvelope
+    connect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+  }
+
+  export type propriedadeimovelUncheckedCreateNestedManyWithoutImovelInput = {
+    create?: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput> | propriedadeimovelCreateWithoutImovelInput[] | propriedadeimovelUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: propriedadeimovelCreateOrConnectWithoutImovelInput | propriedadeimovelCreateOrConnectWithoutImovelInput[]
+    createMany?: propriedadeimovelCreateManyImovelInputEnvelope
+    connect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type Enumclassificacao_enumFieldUpdateOperationsInput = {
+    set?: $Enums.classificacao_enum
+  }
+
+  export type Enumtipologia_enumFieldUpdateOperationsInput = {
+    set?: $Enums.tipologia_enum
+  }
+
+  export type Enumstatus_imovel_enumFieldUpdateOperationsInput = {
+    set?: $Enums.status_imovel_enum
+  }
+
+  export type enderecoUpdateOneRequiredWithoutImovelNestedInput = {
+    create?: XOR<enderecoCreateWithoutImovelInput, enderecoUncheckedCreateWithoutImovelInput>
+    connectOrCreate?: enderecoCreateOrConnectWithoutImovelInput
+    upsert?: enderecoUpsertWithoutImovelInput
+    connect?: enderecoWhereUniqueInput
+    update?: XOR<XOR<enderecoUpdateToOneWithWhereWithoutImovelInput, enderecoUpdateWithoutImovelInput>, enderecoUncheckedUpdateWithoutImovelInput>
+  }
+
+  export type contratolocacaoUpdateManyWithoutImovelNestedInput = {
+    create?: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput> | contratolocacaoCreateWithoutImovelInput[] | contratolocacaoUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutImovelInput | contratolocacaoCreateOrConnectWithoutImovelInput[]
+    upsert?: contratolocacaoUpsertWithWhereUniqueWithoutImovelInput | contratolocacaoUpsertWithWhereUniqueWithoutImovelInput[]
+    createMany?: contratolocacaoCreateManyImovelInputEnvelope
+    set?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    disconnect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    delete?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    connect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    update?: contratolocacaoUpdateWithWhereUniqueWithoutImovelInput | contratolocacaoUpdateWithWhereUniqueWithoutImovelInput[]
+    updateMany?: contratolocacaoUpdateManyWithWhereWithoutImovelInput | contratolocacaoUpdateManyWithWhereWithoutImovelInput[]
+    deleteMany?: contratolocacaoScalarWhereInput | contratolocacaoScalarWhereInput[]
+  }
+
+  export type propriedadeimovelUpdateManyWithoutImovelNestedInput = {
+    create?: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput> | propriedadeimovelCreateWithoutImovelInput[] | propriedadeimovelUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: propriedadeimovelCreateOrConnectWithoutImovelInput | propriedadeimovelCreateOrConnectWithoutImovelInput[]
+    upsert?: propriedadeimovelUpsertWithWhereUniqueWithoutImovelInput | propriedadeimovelUpsertWithWhereUniqueWithoutImovelInput[]
+    createMany?: propriedadeimovelCreateManyImovelInputEnvelope
+    set?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    disconnect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    delete?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    connect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    update?: propriedadeimovelUpdateWithWhereUniqueWithoutImovelInput | propriedadeimovelUpdateWithWhereUniqueWithoutImovelInput[]
+    updateMany?: propriedadeimovelUpdateManyWithWhereWithoutImovelInput | propriedadeimovelUpdateManyWithWhereWithoutImovelInput[]
+    deleteMany?: propriedadeimovelScalarWhereInput | propriedadeimovelScalarWhereInput[]
+  }
+
+  export type contratolocacaoUncheckedUpdateManyWithoutImovelNestedInput = {
+    create?: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput> | contratolocacaoCreateWithoutImovelInput[] | contratolocacaoUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutImovelInput | contratolocacaoCreateOrConnectWithoutImovelInput[]
+    upsert?: contratolocacaoUpsertWithWhereUniqueWithoutImovelInput | contratolocacaoUpsertWithWhereUniqueWithoutImovelInput[]
+    createMany?: contratolocacaoCreateManyImovelInputEnvelope
+    set?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    disconnect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    delete?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    connect?: contratolocacaoWhereUniqueInput | contratolocacaoWhereUniqueInput[]
+    update?: contratolocacaoUpdateWithWhereUniqueWithoutImovelInput | contratolocacaoUpdateWithWhereUniqueWithoutImovelInput[]
+    updateMany?: contratolocacaoUpdateManyWithWhereWithoutImovelInput | contratolocacaoUpdateManyWithWhereWithoutImovelInput[]
+    deleteMany?: contratolocacaoScalarWhereInput | contratolocacaoScalarWhereInput[]
+  }
+
+  export type propriedadeimovelUncheckedUpdateManyWithoutImovelNestedInput = {
+    create?: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput> | propriedadeimovelCreateWithoutImovelInput[] | propriedadeimovelUncheckedCreateWithoutImovelInput[]
+    connectOrCreate?: propriedadeimovelCreateOrConnectWithoutImovelInput | propriedadeimovelCreateOrConnectWithoutImovelInput[]
+    upsert?: propriedadeimovelUpsertWithWhereUniqueWithoutImovelInput | propriedadeimovelUpsertWithWhereUniqueWithoutImovelInput[]
+    createMany?: propriedadeimovelCreateManyImovelInputEnvelope
+    set?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    disconnect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    delete?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    connect?: propriedadeimovelWhereUniqueInput | propriedadeimovelWhereUniqueInput[]
+    update?: propriedadeimovelUpdateWithWhereUniqueWithoutImovelInput | propriedadeimovelUpdateWithWhereUniqueWithoutImovelInput[]
+    updateMany?: propriedadeimovelUpdateManyWithWhereWithoutImovelInput | propriedadeimovelUpdateManyWithWhereWithoutImovelInput[]
+    deleteMany?: propriedadeimovelScalarWhereInput | propriedadeimovelScalarWhereInput[]
+  }
+
+  export type imovelCreateNestedOneWithoutPropriedadeimovelInput = {
+    create?: XOR<imovelCreateWithoutPropriedadeimovelInput, imovelUncheckedCreateWithoutPropriedadeimovelInput>
+    connectOrCreate?: imovelCreateOrConnectWithoutPropriedadeimovelInput
+    connect?: imovelWhereUniqueInput
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type imovelUpdateOneRequiredWithoutPropriedadeimovelNestedInput = {
+    create?: XOR<imovelCreateWithoutPropriedadeimovelInput, imovelUncheckedCreateWithoutPropriedadeimovelInput>
+    connectOrCreate?: imovelCreateOrConnectWithoutPropriedadeimovelInput
+    upsert?: imovelUpsertWithoutPropriedadeimovelInput
+    connect?: imovelWhereUniqueInput
+    update?: XOR<XOR<imovelUpdateToOneWithWhereWithoutPropriedadeimovelInput, imovelUpdateWithoutPropriedadeimovelInput>, imovelUncheckedUpdateWithoutPropriedadeimovelInput>
+  }
+
+  export type imovelCreateNestedOneWithoutContratolocacaoInput = {
+    create?: XOR<imovelCreateWithoutContratolocacaoInput, imovelUncheckedCreateWithoutContratolocacaoInput>
+    connectOrCreate?: imovelCreateOrConnectWithoutContratolocacaoInput
+    connect?: imovelWhereUniqueInput
+  }
+
+  export type despesaCreateNestedManyWithoutContratolocacaoInput = {
+    create?: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput> | despesaCreateWithoutContratolocacaoInput[] | despesaUncheckedCreateWithoutContratolocacaoInput[]
+    connectOrCreate?: despesaCreateOrConnectWithoutContratolocacaoInput | despesaCreateOrConnectWithoutContratolocacaoInput[]
+    createMany?: despesaCreateManyContratolocacaoInputEnvelope
+    connect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+  }
+
+  export type despesaUncheckedCreateNestedManyWithoutContratolocacaoInput = {
+    create?: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput> | despesaCreateWithoutContratolocacaoInput[] | despesaUncheckedCreateWithoutContratolocacaoInput[]
+    connectOrCreate?: despesaCreateOrConnectWithoutContratolocacaoInput | despesaCreateOrConnectWithoutContratolocacaoInput[]
+    createMany?: despesaCreateManyContratolocacaoInputEnvelope
+    connect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type Enumstatus_contrato_enumFieldUpdateOperationsInput = {
+    set?: $Enums.status_contrato_enum
+  }
+
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Bytes | null
+  }
+
+  export type imovelUpdateOneRequiredWithoutContratolocacaoNestedInput = {
+    create?: XOR<imovelCreateWithoutContratolocacaoInput, imovelUncheckedCreateWithoutContratolocacaoInput>
+    connectOrCreate?: imovelCreateOrConnectWithoutContratolocacaoInput
+    upsert?: imovelUpsertWithoutContratolocacaoInput
+    connect?: imovelWhereUniqueInput
+    update?: XOR<XOR<imovelUpdateToOneWithWhereWithoutContratolocacaoInput, imovelUpdateWithoutContratolocacaoInput>, imovelUncheckedUpdateWithoutContratolocacaoInput>
+  }
+
+  export type despesaUpdateManyWithoutContratolocacaoNestedInput = {
+    create?: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput> | despesaCreateWithoutContratolocacaoInput[] | despesaUncheckedCreateWithoutContratolocacaoInput[]
+    connectOrCreate?: despesaCreateOrConnectWithoutContratolocacaoInput | despesaCreateOrConnectWithoutContratolocacaoInput[]
+    upsert?: despesaUpsertWithWhereUniqueWithoutContratolocacaoInput | despesaUpsertWithWhereUniqueWithoutContratolocacaoInput[]
+    createMany?: despesaCreateManyContratolocacaoInputEnvelope
+    set?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    disconnect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    delete?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    connect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    update?: despesaUpdateWithWhereUniqueWithoutContratolocacaoInput | despesaUpdateWithWhereUniqueWithoutContratolocacaoInput[]
+    updateMany?: despesaUpdateManyWithWhereWithoutContratolocacaoInput | despesaUpdateManyWithWhereWithoutContratolocacaoInput[]
+    deleteMany?: despesaScalarWhereInput | despesaScalarWhereInput[]
+  }
+
+  export type despesaUncheckedUpdateManyWithoutContratolocacaoNestedInput = {
+    create?: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput> | despesaCreateWithoutContratolocacaoInput[] | despesaUncheckedCreateWithoutContratolocacaoInput[]
+    connectOrCreate?: despesaCreateOrConnectWithoutContratolocacaoInput | despesaCreateOrConnectWithoutContratolocacaoInput[]
+    upsert?: despesaUpsertWithWhereUniqueWithoutContratolocacaoInput | despesaUpsertWithWhereUniqueWithoutContratolocacaoInput[]
+    createMany?: despesaCreateManyContratolocacaoInputEnvelope
+    set?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    disconnect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    delete?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    connect?: despesaWhereUniqueInput | despesaWhereUniqueInput[]
+    update?: despesaUpdateWithWhereUniqueWithoutContratolocacaoInput | despesaUpdateWithWhereUniqueWithoutContratolocacaoInput[]
+    updateMany?: despesaUpdateManyWithWhereWithoutContratolocacaoInput | despesaUpdateManyWithWhereWithoutContratolocacaoInput[]
+    deleteMany?: despesaScalarWhereInput | despesaScalarWhereInput[]
+  }
+
+  export type contratolocacaoCreateNestedOneWithoutDespesaInput = {
+    create?: XOR<contratolocacaoCreateWithoutDespesaInput, contratolocacaoUncheckedCreateWithoutDespesaInput>
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutDespesaInput
+    connect?: contratolocacaoWhereUniqueInput
+  }
+
+  export type Enumtipo_despesa_enumFieldUpdateOperationsInput = {
+    set?: $Enums.tipo_despesa_enum
+  }
+
+  export type Enumstatus_despesa_enumFieldUpdateOperationsInput = {
+    set?: $Enums.status_despesa_enum
+  }
+
+  export type contratolocacaoUpdateOneRequiredWithoutDespesaNestedInput = {
+    create?: XOR<contratolocacaoCreateWithoutDespesaInput, contratolocacaoUncheckedCreateWithoutDespesaInput>
+    connectOrCreate?: contratolocacaoCreateOrConnectWithoutDespesaInput
+    upsert?: contratolocacaoUpsertWithoutDespesaInput
+    connect?: contratolocacaoWhereUniqueInput
+    update?: XOR<XOR<contratolocacaoUpdateToOneWithWhereWithoutDespesaInput, contratolocacaoUpdateWithoutDespesaInput>, contratolocacaoUncheckedUpdateWithoutDespesaInput>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumclassificacao_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.classificacao_enum | Enumclassificacao_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.classificacao_enum[]
+    notIn?: $Enums.classificacao_enum[]
+    not?: NestedEnumclassificacao_enumFilter<$PrismaModel> | $Enums.classificacao_enum
+  }
+
+  export type NestedEnumtipologia_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipologia_enum | Enumtipologia_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipologia_enum[]
+    notIn?: $Enums.tipologia_enum[]
+    not?: NestedEnumtipologia_enumFilter<$PrismaModel> | $Enums.tipologia_enum
+  }
+
+  export type NestedEnumstatus_imovel_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_imovel_enum | Enumstatus_imovel_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_imovel_enum[]
+    notIn?: $Enums.status_imovel_enum[]
+    not?: NestedEnumstatus_imovel_enumFilter<$PrismaModel> | $Enums.status_imovel_enum
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumclassificacao_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.classificacao_enum | Enumclassificacao_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.classificacao_enum[]
+    notIn?: $Enums.classificacao_enum[]
+    not?: NestedEnumclassificacao_enumWithAggregatesFilter<$PrismaModel> | $Enums.classificacao_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumclassificacao_enumFilter<$PrismaModel>
+    _max?: NestedEnumclassificacao_enumFilter<$PrismaModel>
+  }
+
+  export type NestedEnumtipologia_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipologia_enum | Enumtipologia_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipologia_enum[]
+    notIn?: $Enums.tipologia_enum[]
+    not?: NestedEnumtipologia_enumWithAggregatesFilter<$PrismaModel> | $Enums.tipologia_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumtipologia_enumFilter<$PrismaModel>
+    _max?: NestedEnumtipologia_enumFilter<$PrismaModel>
+  }
+
+  export type NestedEnumstatus_imovel_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_imovel_enum | Enumstatus_imovel_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_imovel_enum[]
+    notIn?: $Enums.status_imovel_enum[]
+    not?: NestedEnumstatus_imovel_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_imovel_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_imovel_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_imovel_enumFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumstatus_contrato_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_contrato_enum | Enumstatus_contrato_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_contrato_enum[]
+    notIn?: $Enums.status_contrato_enum[]
+    not?: NestedEnumstatus_contrato_enumFilter<$PrismaModel> | $Enums.status_contrato_enum
+  }
+
+  export type NestedBytesNullableFilter<$PrismaModel = never> = {
+    equals?: Bytes | BytesFieldRefInput<$PrismaModel> | null
+    in?: Bytes[] | null
+    notIn?: Bytes[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Bytes | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumstatus_contrato_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_contrato_enum | Enumstatus_contrato_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_contrato_enum[]
+    notIn?: $Enums.status_contrato_enum[]
+    not?: NestedEnumstatus_contrato_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_contrato_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_contrato_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_contrato_enumFilter<$PrismaModel>
+  }
+
+  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Bytes | BytesFieldRefInput<$PrismaModel> | null
+    in?: Bytes[] | null
+    notIn?: Bytes[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Bytes | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumtipo_despesa_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipo_despesa_enum | Enumtipo_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipo_despesa_enum[]
+    notIn?: $Enums.tipo_despesa_enum[]
+    not?: NestedEnumtipo_despesa_enumFilter<$PrismaModel> | $Enums.tipo_despesa_enum
+  }
+
+  export type NestedEnumstatus_despesa_enumFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_despesa_enum | Enumstatus_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_despesa_enum[]
+    notIn?: $Enums.status_despesa_enum[]
+    not?: NestedEnumstatus_despesa_enumFilter<$PrismaModel> | $Enums.status_despesa_enum
+  }
+
+  export type NestedEnumtipo_despesa_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.tipo_despesa_enum | Enumtipo_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.tipo_despesa_enum[]
+    notIn?: $Enums.tipo_despesa_enum[]
+    not?: NestedEnumtipo_despesa_enumWithAggregatesFilter<$PrismaModel> | $Enums.tipo_despesa_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumtipo_despesa_enumFilter<$PrismaModel>
+    _max?: NestedEnumtipo_despesa_enumFilter<$PrismaModel>
+  }
+
+  export type NestedEnumstatus_despesa_enumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.status_despesa_enum | Enumstatus_despesa_enumFieldRefInput<$PrismaModel>
+    in?: $Enums.status_despesa_enum[]
+    notIn?: $Enums.status_despesa_enum[]
+    not?: NestedEnumstatus_despesa_enumWithAggregatesFilter<$PrismaModel> | $Enums.status_despesa_enum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumstatus_despesa_enumFilter<$PrismaModel>
+    _max?: NestedEnumstatus_despesa_enumFilter<$PrismaModel>
+  }
+
+  export type imovelCreateWithoutEnderecoInput = {
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoCreateNestedManyWithoutImovelInput
+    propriedadeimovel?: propriedadeimovelCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelUncheckedCreateWithoutEnderecoInput = {
+    id?: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedCreateNestedManyWithoutImovelInput
+    propriedadeimovel?: propriedadeimovelUncheckedCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelCreateOrConnectWithoutEnderecoInput = {
+    where: imovelWhereUniqueInput
+    create: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput>
+  }
+
+  export type imovelCreateManyEnderecoInputEnvelope = {
+    data: imovelCreateManyEnderecoInput | imovelCreateManyEnderecoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type imovelUpsertWithWhereUniqueWithoutEnderecoInput = {
+    where: imovelWhereUniqueInput
+    update: XOR<imovelUpdateWithoutEnderecoInput, imovelUncheckedUpdateWithoutEnderecoInput>
+    create: XOR<imovelCreateWithoutEnderecoInput, imovelUncheckedCreateWithoutEnderecoInput>
+  }
+
+  export type imovelUpdateWithWhereUniqueWithoutEnderecoInput = {
+    where: imovelWhereUniqueInput
+    data: XOR<imovelUpdateWithoutEnderecoInput, imovelUncheckedUpdateWithoutEnderecoInput>
+  }
+
+  export type imovelUpdateManyWithWhereWithoutEnderecoInput = {
+    where: imovelScalarWhereInput
+    data: XOR<imovelUpdateManyMutationInput, imovelUncheckedUpdateManyWithoutEnderecoInput>
+  }
+
+  export type imovelScalarWhereInput = {
+    AND?: imovelScalarWhereInput | imovelScalarWhereInput[]
+    OR?: imovelScalarWhereInput[]
+    NOT?: imovelScalarWhereInput | imovelScalarWhereInput[]
+    id?: IntFilter<"imovel"> | number
+    idEndereco?: IntFilter<"imovel"> | number
+    inscricaoIPTU?: StringNullableFilter<"imovel"> | string | null
+    inscricaoBombeiro?: StringNullableFilter<"imovel"> | string | null
+    metragem?: StringNullableFilter<"imovel"> | string | null
+    dataCadastro?: DateTimeFilter<"imovel"> | Date | string
+    classificacao?: Enumclassificacao_enumFilter<"imovel"> | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFilter<"imovel"> | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFilter<"imovel"> | $Enums.status_imovel_enum
+  }
+
+  export type enderecoCreateWithoutImovelInput = {
+    rua: string
+    numero?: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+  }
+
+  export type enderecoUncheckedCreateWithoutImovelInput = {
+    id?: number
+    rua: string
+    numero?: string | null
+    bairro: string
+    cidade: string
+    estado: string
+    cep: string
+  }
+
+  export type enderecoCreateOrConnectWithoutImovelInput = {
+    where: enderecoWhereUniqueInput
+    create: XOR<enderecoCreateWithoutImovelInput, enderecoUncheckedCreateWithoutImovelInput>
+  }
+
+  export type contratolocacaoCreateWithoutImovelInput = {
+    id?: bigint | number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+    despesa?: despesaCreateNestedManyWithoutContratolocacaoInput
+  }
+
+  export type contratolocacaoUncheckedCreateWithoutImovelInput = {
+    id?: bigint | number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+    despesa?: despesaUncheckedCreateNestedManyWithoutContratolocacaoInput
+  }
+
+  export type contratolocacaoCreateOrConnectWithoutImovelInput = {
+    where: contratolocacaoWhereUniqueInput
+    create: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput>
+  }
+
+  export type contratolocacaoCreateManyImovelInputEnvelope = {
+    data: contratolocacaoCreateManyImovelInput | contratolocacaoCreateManyImovelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type propriedadeimovelCreateWithoutImovelInput = {
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUncheckedCreateWithoutImovelInput = {
+    id?: number
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelCreateOrConnectWithoutImovelInput = {
+    where: propriedadeimovelWhereUniqueInput
+    create: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput>
+  }
+
+  export type propriedadeimovelCreateManyImovelInputEnvelope = {
+    data: propriedadeimovelCreateManyImovelInput | propriedadeimovelCreateManyImovelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type enderecoUpsertWithoutImovelInput = {
+    update: XOR<enderecoUpdateWithoutImovelInput, enderecoUncheckedUpdateWithoutImovelInput>
+    create: XOR<enderecoCreateWithoutImovelInput, enderecoUncheckedCreateWithoutImovelInput>
+    where?: enderecoWhereInput
+  }
+
+  export type enderecoUpdateToOneWithWhereWithoutImovelInput = {
+    where?: enderecoWhereInput
+    data: XOR<enderecoUpdateWithoutImovelInput, enderecoUncheckedUpdateWithoutImovelInput>
+  }
+
+  export type enderecoUpdateWithoutImovelInput = {
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type enderecoUncheckedUpdateWithoutImovelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    rua?: StringFieldUpdateOperationsInput | string
+    numero?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type contratolocacaoUpsertWithWhereUniqueWithoutImovelInput = {
+    where: contratolocacaoWhereUniqueInput
+    update: XOR<contratolocacaoUpdateWithoutImovelInput, contratolocacaoUncheckedUpdateWithoutImovelInput>
+    create: XOR<contratolocacaoCreateWithoutImovelInput, contratolocacaoUncheckedCreateWithoutImovelInput>
+  }
+
+  export type contratolocacaoUpdateWithWhereUniqueWithoutImovelInput = {
+    where: contratolocacaoWhereUniqueInput
+    data: XOR<contratolocacaoUpdateWithoutImovelInput, contratolocacaoUncheckedUpdateWithoutImovelInput>
+  }
+
+  export type contratolocacaoUpdateManyWithWhereWithoutImovelInput = {
+    where: contratolocacaoScalarWhereInput
+    data: XOR<contratolocacaoUpdateManyMutationInput, contratolocacaoUncheckedUpdateManyWithoutImovelInput>
+  }
+
+  export type contratolocacaoScalarWhereInput = {
+    AND?: contratolocacaoScalarWhereInput | contratolocacaoScalarWhereInput[]
+    OR?: contratolocacaoScalarWhereInput[]
+    NOT?: contratolocacaoScalarWhereInput | contratolocacaoScalarWhereInput[]
+    id?: BigIntFilter<"contratolocacao"> | bigint | number
+    idImovel?: IntFilter<"contratolocacao"> | number
+    idLocador?: BigIntFilter<"contratolocacao"> | bigint | number
+    idLocatario?: BigIntFilter<"contratolocacao"> | bigint | number
+    dataInicio?: DateTimeFilter<"contratolocacao"> | Date | string
+    dataFim?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    dataReajuste?: DateTimeNullableFilter<"contratolocacao"> | Date | string | null
+    valorAluguel?: DecimalFilter<"contratolocacao"> | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFilter<"contratolocacao"> | $Enums.status_contrato_enum
+    contratoDigitalizado?: BytesNullableFilter<"contratolocacao"> | Bytes | null
+  }
+
+  export type propriedadeimovelUpsertWithWhereUniqueWithoutImovelInput = {
+    where: propriedadeimovelWhereUniqueInput
+    update: XOR<propriedadeimovelUpdateWithoutImovelInput, propriedadeimovelUncheckedUpdateWithoutImovelInput>
+    create: XOR<propriedadeimovelCreateWithoutImovelInput, propriedadeimovelUncheckedCreateWithoutImovelInput>
+  }
+
+  export type propriedadeimovelUpdateWithWhereUniqueWithoutImovelInput = {
+    where: propriedadeimovelWhereUniqueInput
+    data: XOR<propriedadeimovelUpdateWithoutImovelInput, propriedadeimovelUncheckedUpdateWithoutImovelInput>
+  }
+
+  export type propriedadeimovelUpdateManyWithWhereWithoutImovelInput = {
+    where: propriedadeimovelScalarWhereInput
+    data: XOR<propriedadeimovelUpdateManyMutationInput, propriedadeimovelUncheckedUpdateManyWithoutImovelInput>
+  }
+
+  export type propriedadeimovelScalarWhereInput = {
+    AND?: propriedadeimovelScalarWhereInput | propriedadeimovelScalarWhereInput[]
+    OR?: propriedadeimovelScalarWhereInput[]
+    NOT?: propriedadeimovelScalarWhereInput | propriedadeimovelScalarWhereInput[]
+    id?: IntFilter<"propriedadeimovel"> | number
+    idImovel?: IntFilter<"propriedadeimovel"> | number
+    idLocador?: BigIntFilter<"propriedadeimovel"> | bigint | number
+    percentualParticipacao?: DecimalFilter<"propriedadeimovel"> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type imovelCreateWithoutPropriedadeimovelInput = {
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    endereco: enderecoCreateNestedOneWithoutImovelInput
+    contratolocacao?: contratolocacaoCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelUncheckedCreateWithoutPropriedadeimovelInput = {
+    id?: number
+    idEndereco: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelCreateOrConnectWithoutPropriedadeimovelInput = {
+    where: imovelWhereUniqueInput
+    create: XOR<imovelCreateWithoutPropriedadeimovelInput, imovelUncheckedCreateWithoutPropriedadeimovelInput>
+  }
+
+  export type imovelUpsertWithoutPropriedadeimovelInput = {
+    update: XOR<imovelUpdateWithoutPropriedadeimovelInput, imovelUncheckedUpdateWithoutPropriedadeimovelInput>
+    create: XOR<imovelCreateWithoutPropriedadeimovelInput, imovelUncheckedCreateWithoutPropriedadeimovelInput>
+    where?: imovelWhereInput
+  }
+
+  export type imovelUpdateToOneWithWhereWithoutPropriedadeimovelInput = {
+    where?: imovelWhereInput
+    data: XOR<imovelUpdateWithoutPropriedadeimovelInput, imovelUncheckedUpdateWithoutPropriedadeimovelInput>
+  }
+
+  export type imovelUpdateWithoutPropriedadeimovelInput = {
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    endereco?: enderecoUpdateOneRequiredWithoutImovelNestedInput
+    contratolocacao?: contratolocacaoUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelUncheckedUpdateWithoutPropriedadeimovelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idEndereco?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelCreateWithoutContratolocacaoInput = {
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    endereco: enderecoCreateNestedOneWithoutImovelInput
+    propriedadeimovel?: propriedadeimovelCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelUncheckedCreateWithoutContratolocacaoInput = {
+    id?: number
+    idEndereco: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+    propriedadeimovel?: propriedadeimovelUncheckedCreateNestedManyWithoutImovelInput
+  }
+
+  export type imovelCreateOrConnectWithoutContratolocacaoInput = {
+    where: imovelWhereUniqueInput
+    create: XOR<imovelCreateWithoutContratolocacaoInput, imovelUncheckedCreateWithoutContratolocacaoInput>
+  }
+
+  export type despesaCreateWithoutContratolocacaoInput = {
+    id?: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+  }
+
+  export type despesaUncheckedCreateWithoutContratolocacaoInput = {
+    id?: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+  }
+
+  export type despesaCreateOrConnectWithoutContratolocacaoInput = {
+    where: despesaWhereUniqueInput
+    create: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput>
+  }
+
+  export type despesaCreateManyContratolocacaoInputEnvelope = {
+    data: despesaCreateManyContratolocacaoInput | despesaCreateManyContratolocacaoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type imovelUpsertWithoutContratolocacaoInput = {
+    update: XOR<imovelUpdateWithoutContratolocacaoInput, imovelUncheckedUpdateWithoutContratolocacaoInput>
+    create: XOR<imovelCreateWithoutContratolocacaoInput, imovelUncheckedCreateWithoutContratolocacaoInput>
+    where?: imovelWhereInput
+  }
+
+  export type imovelUpdateToOneWithWhereWithoutContratolocacaoInput = {
+    where?: imovelWhereInput
+    data: XOR<imovelUpdateWithoutContratolocacaoInput, imovelUncheckedUpdateWithoutContratolocacaoInput>
+  }
+
+  export type imovelUpdateWithoutContratolocacaoInput = {
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    endereco?: enderecoUpdateOneRequiredWithoutImovelNestedInput
+    propriedadeimovel?: propriedadeimovelUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelUncheckedUpdateWithoutContratolocacaoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idEndereco?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    propriedadeimovel?: propriedadeimovelUncheckedUpdateManyWithoutImovelNestedInput
+  }
+
+  export type despesaUpsertWithWhereUniqueWithoutContratolocacaoInput = {
+    where: despesaWhereUniqueInput
+    update: XOR<despesaUpdateWithoutContratolocacaoInput, despesaUncheckedUpdateWithoutContratolocacaoInput>
+    create: XOR<despesaCreateWithoutContratolocacaoInput, despesaUncheckedCreateWithoutContratolocacaoInput>
+  }
+
+  export type despesaUpdateWithWhereUniqueWithoutContratolocacaoInput = {
+    where: despesaWhereUniqueInput
+    data: XOR<despesaUpdateWithoutContratolocacaoInput, despesaUncheckedUpdateWithoutContratolocacaoInput>
+  }
+
+  export type despesaUpdateManyWithWhereWithoutContratolocacaoInput = {
+    where: despesaScalarWhereInput
+    data: XOR<despesaUpdateManyMutationInput, despesaUncheckedUpdateManyWithoutContratolocacaoInput>
+  }
+
+  export type despesaScalarWhereInput = {
+    AND?: despesaScalarWhereInput | despesaScalarWhereInput[]
+    OR?: despesaScalarWhereInput[]
+    NOT?: despesaScalarWhereInput | despesaScalarWhereInput[]
+    id?: BigIntFilter<"despesa"> | bigint | number
+    idContratoLocacao?: BigIntFilter<"despesa"> | bigint | number
+    descricao?: StringFilter<"despesa"> | string
+    valor?: DecimalFilter<"despesa"> | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFilter<"despesa"> | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFilter<"despesa"> | Date | string
+    dataPagamento?: DateTimeNullableFilter<"despesa"> | Date | string | null
+    status?: Enumstatus_despesa_enumFilter<"despesa"> | $Enums.status_despesa_enum
+    comprovantePagamento?: BytesNullableFilter<"despesa"> | Bytes | null
+  }
+
+  export type contratolocacaoCreateWithoutDespesaInput = {
+    id?: bigint | number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+    imovel: imovelCreateNestedOneWithoutContratolocacaoInput
+  }
+
+  export type contratolocacaoUncheckedCreateWithoutDespesaInput = {
+    id?: bigint | number
+    idImovel: number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+  }
+
+  export type contratolocacaoCreateOrConnectWithoutDespesaInput = {
+    where: contratolocacaoWhereUniqueInput
+    create: XOR<contratolocacaoCreateWithoutDespesaInput, contratolocacaoUncheckedCreateWithoutDespesaInput>
+  }
+
+  export type contratolocacaoUpsertWithoutDespesaInput = {
+    update: XOR<contratolocacaoUpdateWithoutDespesaInput, contratolocacaoUncheckedUpdateWithoutDespesaInput>
+    create: XOR<contratolocacaoCreateWithoutDespesaInput, contratolocacaoUncheckedCreateWithoutDespesaInput>
+    where?: contratolocacaoWhereInput
+  }
+
+  export type contratolocacaoUpdateToOneWithWhereWithoutDespesaInput = {
+    where?: contratolocacaoWhereInput
+    data: XOR<contratolocacaoUpdateWithoutDespesaInput, contratolocacaoUncheckedUpdateWithoutDespesaInput>
+  }
+
+  export type contratolocacaoUpdateWithoutDespesaInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    imovel?: imovelUpdateOneRequiredWithoutContratolocacaoNestedInput
+  }
+
+  export type contratolocacaoUncheckedUpdateWithoutDespesaInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idImovel?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type imovelCreateManyEnderecoInput = {
+    id?: number
+    inscricaoIPTU?: string | null
+    inscricaoBombeiro?: string | null
+    metragem?: string | null
+    dataCadastro?: Date | string
+    classificacao: $Enums.classificacao_enum
+    tipologia: $Enums.tipologia_enum
+    status: $Enums.status_imovel_enum
+  }
+
+  export type imovelUpdateWithoutEnderecoInput = {
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUpdateManyWithoutImovelNestedInput
+    propriedadeimovel?: propriedadeimovelUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelUncheckedUpdateWithoutEnderecoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+    contratolocacao?: contratolocacaoUncheckedUpdateManyWithoutImovelNestedInput
+    propriedadeimovel?: propriedadeimovelUncheckedUpdateManyWithoutImovelNestedInput
+  }
+
+  export type imovelUncheckedUpdateManyWithoutEnderecoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    inscricaoIPTU?: NullableStringFieldUpdateOperationsInput | string | null
+    inscricaoBombeiro?: NullableStringFieldUpdateOperationsInput | string | null
+    metragem?: NullableStringFieldUpdateOperationsInput | string | null
+    dataCadastro?: DateTimeFieldUpdateOperationsInput | Date | string
+    classificacao?: Enumclassificacao_enumFieldUpdateOperationsInput | $Enums.classificacao_enum
+    tipologia?: Enumtipologia_enumFieldUpdateOperationsInput | $Enums.tipologia_enum
+    status?: Enumstatus_imovel_enumFieldUpdateOperationsInput | $Enums.status_imovel_enum
+  }
+
+  export type contratolocacaoCreateManyImovelInput = {
+    id?: bigint | number
+    idLocador: bigint | number
+    idLocatario: bigint | number
+    dataInicio: Date | string
+    dataFim?: Date | string | null
+    dataReajuste?: Date | string | null
+    valorAluguel: Decimal | DecimalJsLike | number | string
+    status?: $Enums.status_contrato_enum
+    contratoDigitalizado?: Bytes | null
+  }
+
+  export type propriedadeimovelCreateManyImovelInput = {
+    id?: number
+    idLocador: bigint | number
+    percentualParticipacao: Decimal | DecimalJsLike | number | string
+  }
+
+  export type contratolocacaoUpdateWithoutImovelInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    despesa?: despesaUpdateManyWithoutContratolocacaoNestedInput
+  }
+
+  export type contratolocacaoUncheckedUpdateWithoutImovelInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+    despesa?: despesaUncheckedUpdateManyWithoutContratolocacaoNestedInput
+  }
+
+  export type contratolocacaoUncheckedUpdateManyWithoutImovelInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    idLocatario?: BigIntFieldUpdateOperationsInput | bigint | number
+    dataInicio?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataFim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dataReajuste?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    valorAluguel?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: Enumstatus_contrato_enumFieldUpdateOperationsInput | $Enums.status_contrato_enum
+    contratoDigitalizado?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type propriedadeimovelUpdateWithoutImovelInput = {
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUncheckedUpdateWithoutImovelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type propriedadeimovelUncheckedUpdateManyWithoutImovelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idLocador?: BigIntFieldUpdateOperationsInput | bigint | number
+    percentualParticipacao?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type despesaCreateManyContratolocacaoInput = {
+    id?: bigint | number
+    descricao: string
+    valor: Decimal | DecimalJsLike | number | string
+    tipo: $Enums.tipo_despesa_enum
+    dataVencimento: Date | string
+    dataPagamento?: Date | string | null
+    status?: $Enums.status_despesa_enum
+    comprovantePagamento?: Bytes | null
+  }
+
+  export type despesaUpdateWithoutContratolocacaoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type despesaUncheckedUpdateWithoutContratolocacaoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+  export type despesaUncheckedUpdateManyWithoutContratolocacaoInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tipo?: Enumtipo_despesa_enumFieldUpdateOperationsInput | $Enums.tipo_despesa_enum
+    dataVencimento?: DateTimeFieldUpdateOperationsInput | Date | string
+    dataPagamento?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: Enumstatus_despesa_enumFieldUpdateOperationsInput | $Enums.status_despesa_enum
+    comprovantePagamento?: NullableBytesFieldUpdateOperationsInput | Bytes | null
+  }
+
+
+
+  /**
+   * Batch Payload for updateMany & deleteMany & createMany
+   */
+
+  export type BatchPayload = {
+    count: number
+  }
+
+  /**
+   * DMMF
+   */
+  export const dmmf: runtime.BaseDMMF
+}
