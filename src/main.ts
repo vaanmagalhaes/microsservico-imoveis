@@ -2,9 +2,15 @@ import 'dotenv/config'; //Garante o carregamento das variáveis de ambiente na i
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //Aqui é onde eu ativo a validação global
+  //Se o Gateway mandar um dado errado, o NestJS vai retornar um erro 400 (Bad Request) automaticamente
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true}));
+
   //CONFIGURAÇÃO DA DOCUMENTAÇÃO (SWAGGER)
   //Configurei o OpenAPI para espelhar o nosso domínio de negócios,
   //facilitando a vida na hora conectar o front-end e realizar o QA
