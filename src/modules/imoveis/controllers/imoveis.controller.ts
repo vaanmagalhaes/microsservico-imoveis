@@ -8,7 +8,7 @@ import { CriarImovelDto } from '../dto/criar-imovel.dto';
 import { AtualizarImovelDto  } from '../dto/atualizar-imovel.dto';
 
 //Etiquetando o controller para o swagger agrupar tudo na aba "Imóveis"
-@ApiTags('imoveis')
+@ApiTags('Imoveis')
 
 //Avisando ao swagger que todas as todas aqui dentro precisam do cateado do JWT
 @ApiBearerAuth()
