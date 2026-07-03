@@ -148,7 +148,7 @@ export class ContratosService {
             //Aqui desliga o contrato
             const contratoEncerrado = await prisma.contratolocacao.update({
                 where: { id: BigInt(id)},
-                data: {status: 'RESCINDIDO'}
+                data: {status: 'ENCERRADO'}
             });
 
             //Libera o imóvel de volta no catálogo
