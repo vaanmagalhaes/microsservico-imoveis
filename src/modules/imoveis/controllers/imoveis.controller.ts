@@ -47,6 +47,13 @@ export class ImoveisController {
         return await this.imoveisService.buscarPorId(id);
     }
 
+    @Get('cep/:cep')
+    @Roles('USER', 'ADMIN')
+    @ApiOperation({summary: 'Buscar endereço de um imóvel por CEP'})
+    async buscarEnderecoPorCep(@Param('cep') cep: string){
+        return await this.imoveisService.buscarEnderecoPorCep(cep);
+    }
+
     @Patch(':id')
     @Roles('USER', 'ADMIN')
     @ApiOperation({summary: 'Atualizar dados de um imóvel'})
