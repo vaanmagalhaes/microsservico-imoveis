@@ -226,8 +226,8 @@ exports.status_imovel_enum = exports.$Enums.status_imovel_enum = {
 
 exports.status_contrato_enum = exports.$Enums.status_contrato_enum = {
   ATIVO: 'ATIVO',
-  INATIVO: 'INATIVO',
-  RESCINDIDO: 'RESCINDIDO'
+  ENCERRADO: 'ENCERRADO',
+  CANCELADO: 'CANCELADO'
 };
 
 exports.tipo_despesa_enum = exports.$Enums.tipo_despesa_enum = {

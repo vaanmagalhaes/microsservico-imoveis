@@ -38,8 +38,8 @@ enum status_imovel_enum {
 
 enum status_contrato_enum {
   ATIVO
-  INATIVO
-  RESCINDIDO
+  ENCERRADO
+  CANCELADO
 }
 
 enum tipo_despesa_enum {
@@ -57,7 +57,7 @@ enum status_despesa_enum {
 }
 
 // ---------------------------------------------------------
-// MODELS (Tabelas)
+// TABELAS
 // ---------------------------------------------------------
 
 model endereco {

@@ -76,8 +76,8 @@ export type status_imovel_enum = (typeof status_imovel_enum)[keyof typeof status
 
 export const status_contrato_enum: {
   ATIVO: 'ATIVO',
-  INATIVO: 'INATIVO',
-  RESCINDIDO: 'RESCINDIDO'
+  ENCERRADO: 'ENCERRADO',
+  CANCELADO: 'CANCELADO'
 };
 
 export type status_contrato_enum = (typeof status_contrato_enum)[keyof typeof status_contrato_enum]
