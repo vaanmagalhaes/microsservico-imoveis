@@ -2,7 +2,6 @@
 // garantindo compatibilidade com o Docker do projeto e seguindo o padrão do microsserviço Locador.
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 // Defini o MySQL como provider e puxei a variável de ambiente segura.

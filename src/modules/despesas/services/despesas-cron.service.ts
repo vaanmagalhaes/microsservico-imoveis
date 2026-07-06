@@ -16,7 +16,7 @@ export class DespesasCronService {
     //O @Cron é que faz o robô acordar todo dia 1 do mês às 00:00
     //porém, para a apresentação, vou colocar a cada 30 segundos,
     //pra gente ver o robô acordando e salvando as despesas no banco de dados
-    @Cron(CronExpression.EVERY_30_SECONDS)
+    @Cron(CronExpression.EVERY_30_MINUTES)
     async gerarAlugueisMensais() {
         this.logger.log('O robô acordou e vai gerar as despesas de aluguel do mês...');
 
