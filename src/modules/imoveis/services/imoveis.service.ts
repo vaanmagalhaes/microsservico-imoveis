@@ -139,4 +139,22 @@ export class ImoveisService {
             }
         });
     }
+
+    async removerDefinitivo(id: number) {
+        await this.buscarPorId(id);
+
+        await this.prisma.$transaction(async (prisma) => {
+            // Apaga o endereço associado primeiro (se for relação 1:1 sem cascade)
+            await prisma.endereco_Imovel.deleteMany({
+                where: { imovelId: id }
+            });
+
+            // Apaga o imóvel
+            await prisma.imovel.delete({
+                where: { id }
+            });
+        });
+
+        return { message: 'Imóvel removido definitivamente com sucesso.' };
+    }
 }

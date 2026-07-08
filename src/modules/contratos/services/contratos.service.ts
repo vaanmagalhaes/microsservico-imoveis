@@ -193,4 +193,20 @@ export class ContratosService {
 
         return this.formatarContrato(contratoAtualizado);
     }
+
+    async removerDefinitivo(id: number) {
+        const contratoOriginal = await this.prisma.contratolocacao.findUnique({
+            where: { id: BigInt(id) }
+        });
+
+        if (!contratoOriginal) {
+            throw new NotFoundException(`Contrato com id ${id} não encontrado para exclusão.`);
+        }
+
+        await this.prisma.contratolocacao.delete({
+            where: { id: BigInt(id) }
+        });
+
+        return { message: 'Contrato removido definitivamente com sucesso.' };
+    }
 }
