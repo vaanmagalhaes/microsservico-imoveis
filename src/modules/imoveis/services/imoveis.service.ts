@@ -140,21 +140,23 @@ export class ImoveisService {
         });
     }
 
-    async removerDefinitivo(id: number) {
-        await this.buscarPorId(id);
+async removerDefinitivo(id: number) {
+        // O buscarPorId já valida se existe e traz os dados (incluindo o idEndereco)
+        const imovel = await this.buscarPorId(id);
 
         await this.prisma.$transaction(async (prisma) => {
-            // Apaga o endereço associado primeiro (se for relação 1:1 sem cascade)
-            await prisma.endereco_Imovel.deleteMany({
-                where: { imovelId: id }
-            });
-
-            // Apaga o imóvel
+            // 1. Apagamos o imóvel primeiro
             await prisma.imovel.delete({
                 where: { id }
             });
+
+            // 2. Agora apagamos o endereço que ficou "órfão"
+            // Usamos prisma.endereco em vez do inventado "enderecoImovel"
+            await prisma.endereco.delete({
+                where: { id: imovel.idEndereco }
+            });
         });
 
-        return { message: 'Imóvel removido definitivamente com sucesso.' };
+        return { message: 'Imóvel e endereço removidos definitivamente com sucesso.' };
     }
 }
