@@ -1,7 +1,7 @@
 # ==========================================
 # ETAPA 1: BUILD (Compilação)
 # ==========================================
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 # Instala o OpenSSL (Necessário para o motor do Prisma rodar no Alpine)
 RUN apk add --no-cache openssl
@@ -29,7 +29,7 @@ RUN npm run build
 # ==========================================
 # ETAPA 2: PRODUÇÃO (Imagem Final Leve)
 # ==========================================
-FROM node:20-alpine
+FROM node:22-alpine
 
 # O ambiente final também precisa do OpenSSL para conectar no banco real
 RUN apk add --no-cache openssl
