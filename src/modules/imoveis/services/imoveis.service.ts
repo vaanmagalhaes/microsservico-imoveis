@@ -140,36 +140,23 @@ export class ImoveisService {
         });
     }
 
-<<<<<<< HEAD
-async removerDefinitivo(id: number) {
+    async removerDefinitivo(id: number) {
         // O buscarPorId já valida se existe e traz os dados (incluindo o idEndereco)
         const imovel = await this.buscarPorId(id);
 
         await this.prisma.$transaction(async (prisma) => {
             // 1. Apagamos o imóvel primeiro
-=======
-    async removerDefinitivo(id: number) {
-        const imovel = await this.buscarPorId(id);
-
-        await this.prisma.$transaction(async (prisma) => {
->>>>>>> cf4651375116ffadc9e74ca2467e52173a1a7cc4
             await prisma.imovel.delete({
                 where: { id }
             });
 
-<<<<<<< HEAD
             // 2. Agora apagamos o endereço que ficou "órfão"
             // Usamos prisma.endereco em vez do inventado "enderecoImovel"
-            await prisma.endereco.delete({
-                where: { id: imovel.idEndereco }
-            });
-=======
             if (imovel.idEndereco) {
                 await prisma.endereco.delete({
                     where: { id: imovel.idEndereco }
                 });
             }
->>>>>>> cf4651375116ffadc9e74ca2467e52173a1a7cc4
         });
 
         return { message: 'Imóvel e endereço removidos definitivamente com sucesso.' };
