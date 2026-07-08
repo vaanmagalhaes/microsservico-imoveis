@@ -141,4 +141,20 @@ export class DespesasService {
 
         return { message: `Despesa ${id} cancelada e excluída com sucesso do sistema.` };
     }
+
+    async removerDefinitivo(id: number) {
+        const despesa = await this.prisma.despesa.findUnique({
+            where: { id: BigInt(id) }
+        });
+
+        if (!despesa) {
+            throw new NotFoundException(`Despesa com ID ${id} não encontrada.`);
+        }
+
+        await this.prisma.despesa.delete({
+            where: { id: BigInt(id) }
+        });
+
+        return { message: 'Despesa removida definitivamente com sucesso.' };
+    }
 }

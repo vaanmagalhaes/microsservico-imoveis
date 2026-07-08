@@ -103,4 +103,12 @@ export class DespesasController {
     async deletar(@Param('id', ParseIntPipe) id: number) {
         return await this.despesasService.deletarDespesa(id);
     }
+
+    @Delete(':id/hard')
+    @Roles('ADMIN')
+    @ApiOperation({ summary: 'Excluir definitivamente uma despesa' })
+    @ApiResponse({ status: 200, description: 'Despesa removida definitivamente com sucesso.' })
+    async removerDefinitivo(@Param('id', ParseIntPipe) id: number) {
+        return await this.despesasService.removerDefinitivo(id);
+    }
 }

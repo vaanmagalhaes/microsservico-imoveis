@@ -83,4 +83,11 @@ export class ContratosController{
     async rescindirContrato(@Param('id', ParseIntPipe) id:number){
         return await this.contratosService.rescindir(id);
     }
+
+    @Delete(':id/hard')
+    @Roles('USER', 'ADMIN')
+    @ApiOperation({summary: 'Excluir definitivamente um contrato do sistema'})
+    async removerContratoDefinitivo(@Param('id', ParseIntPipe) id: number){
+        return await this.contratosService.removerDefinitivo(id);
+    }
 }
