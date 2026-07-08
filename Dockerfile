@@ -10,6 +10,7 @@ WORKDIR /app
 
 # Copia os arquivos de dependência primeiro (Otimiza o cache do Docker)
 COPY package*.json ./
+COPY prisma ./prisma/
 RUN npm install
 
 # Copia todo o restante do código fonte

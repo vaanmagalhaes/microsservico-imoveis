@@ -73,7 +73,7 @@ export class ImoveisController {
     }
 
     @Delete(':id/hard')
-    @Roles('USER', 'ADMIN')
+    @Roles('ADMIN')
     @ApiOperation({summary: 'Excluir definitivamente um imóvel do catálogo'})
     async removerImovelDefinitivo(@Param('id', ParseIntPipe) id: number){
         return await this.imoveisService.removerDefinitivo(id);

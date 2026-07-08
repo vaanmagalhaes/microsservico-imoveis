@@ -96,7 +96,7 @@ export class DespesasController {
     }
 
     @Delete(':id')
-    @Roles('ADMIN') //Opcional: Aqui eu restrinjo para apenas ADMIN poder apagar
+    @Roles('USER', 'ADMIN')
     @ApiOperation({ summary: 'Cancelar e excluir uma despesa lançada erroneamente' })
     @ApiResponse({ status: 200, description: 'Despesa excluída com sucesso.' })
     @ApiResponse({ status: 400, description: 'Bloqueio: A despesa já está PAGA.' })

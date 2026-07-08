@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, UploadedFile, UseInterceptors } from '@nestjs/common';
+=======
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Delete, UseGuards, UploadedFile, UseInterceptors } from '@nestjs/common';
+>>>>>>> cf4651375116ffadc9e74ca2467e52173a1a7cc4
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ContratosService } from '../services/contratos.service';
@@ -85,7 +89,7 @@ export class ContratosController{
     }
 
     @Delete(':id/hard')
-    @Roles('USER', 'ADMIN')
+    @Roles('ADMIN')
     @ApiOperation({summary: 'Excluir definitivamente um contrato do sistema'})
     async removerContratoDefinitivo(@Param('id', ParseIntPipe) id: number){
         return await this.contratosService.removerDefinitivo(id);
